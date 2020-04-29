@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+      
+        <meta name="author" content="keyfox">
+      
+        <meta name="description" content="pochi the MS-IME Japanese Input emulation library for JavaScript">
+      
+    
+    <title>Question</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/search.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.4.5/fuse.min.js"></script> -->
+    <script src="scripts/fuse.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme.css">
+    
+    
+    
+<svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z"/>
+                <path d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z"/>
+            </g>
+        </symbol>
+    </defs>
+</svg>
+
+</head>
+<body>
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html"><div class="text">Home</div></a></h2><div class="search-box"><input type="text" placeholder="Search..." id="search-box" /><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-list-div"><ul><li><a href='https://github.com/keyfox/pochi' class='' id='' target='_blank'>Github</a></li></ul><h3>Classes</h3><ul><li><a href="module-msime-ja.ComposedKeysequence.html">ComposedKeysequence</a></li><li><a href="module-msime-ja.KeystrokesInterpretation.html">KeystrokesInterpretation</a></li><li><a href="module-msime-ja-Keysequence.html">Keysequence</a></li><li><a href="module-question.Question.html">Question</a><ul class='methods'><li data-type='method'><a href="module-question.Question.html#acceptsKeyInputs">acceptsKeyInputs</a></li><li data-type='method'><a href="module-question.Question.html#getFirstKeysequencesFrom">getFirstKeysequencesFrom</a></li><li data-type='method'><a href="module-question.Question.html#getKeysequenceFrom">getKeysequenceFrom</a></li><li data-type='method'><a href="module-question.Question.html#getNextKeysequences">getNextKeysequences</a></li><li data-type='method'><a href="module-question.Question.html#getNextPossibleKeysequences">getNextPossibleKeysequences</a></li><li data-type='method'><a href="module-question.Question.html#getRestKeysequence">getRestKeysequence</a></li><li data-type='method'><a href="module-question.Question.html#getRestText">getRestText</a></li><li data-type='method'><a href="module-question.Question.html#isSolved">isSolved</a></li><li data-type='method'><a href="module-question.Question.html#supplyKeyInputs">supplyKeyInputs</a></li></ul></li><li><a href="module-state-machine.TypingStateMachine.html">TypingStateMachine</a><ul class='methods'><li data-type='method'><a href="module-state-machine.TypingStateMachine.html#supplyKeyInputs">supplyKeyInputs</a></li><li data-type='method'><a href="module-state-machine.TypingStateMachine.html#supplyResolvedKeystrokes">supplyResolvedKeystrokes</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-msime-ja.html">msime-ja</a><ul class='methods'><li data-type='method'><a href="module-msime-ja.html#.getNextKeysequencesList">getNextKeysequencesList</a></li><li data-type='method'><a href="module-msime-ja.html#.interpretKeystrokes">interpretKeystrokes</a></li><li data-type='method'><a href="module-msime-ja.html#.sequenceChooser">sequenceChooser</a></li><li data-type='method'><a href="module-msime-ja.html#~createCharToTrueDict">createCharToTrueDict</a></li></ul></li><li><a href="module-question.html">question</a></li><li><a href="module-state-machine.html">state-machine</a></li></ul></div>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Question</h1>
+    
+
+    
+
+
+
+
+<section>
+
+
+<header>
+    
+        
+        <h2>
+        
+            <span class="ancestors"><a href="module-question.html">question</a>.</span>
+        
+        Question
+        
+        </h2>
+        
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    <h4 class="name" id="Question"><span class="type-signature"></span>new Question<span class="signature">(goal, opts<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>goal</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A text to be typed.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">An option object.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sequenceChooser</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module:msime-ja.SequenceChooser</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A sequence picker function used as the default.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line14">line 14</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="goal"><span class="type-signature"></span>goal<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    The text to be eventually typed.
+</div>
+
+
+
+    <div class="member-item-container flex">
+        <strong>Type: </strong>
+        <ul>
+            <li>
+                
+<span class="param-type">string</span>
+
+
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line27">line 27</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="acceptsKeyInputs"><span class="type-signature"></span>acceptsKeyInputs<span class="signature">(keyInputs)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Returns a boolean that indicates whether the given key inputs are acceptable.
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>keyInputs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Key inputs to test if acceptable.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line111">line 111</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    - True if acceptable, and false if not.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getFirstKeysequencesFrom"><span class="type-signature"></span>getFirstKeysequencesFrom<span class="signature">(index)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="module-msime-ja-Keysequence.html">module:msime-ja~Keysequence</a>>}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Returns the first keysequence of every valid keysequence to type the goal text.
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">A zero-based index that indicates the position of text to start typing.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line44">line 44</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    - The valid first keysequences.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;<a href="module-msime-ja-Keysequence.html">module:msime-ja~Keysequence</a>></span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getKeysequenceFrom"><span class="type-signature"></span>getKeysequenceFrom<span class="signature">(index, sequenceChooser<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {ComposedKeysequence}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Returns keysequences for entire goal text based on sequence chooser function.
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A zero-based index that indicates the position of text to start typing.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sequenceChooser</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SequenceChooser</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A sequence chooser function; uses the instance's default if not specified.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line70">line 70</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ComposedKeysequence</span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getNextKeysequences"><span class="type-signature"></span>getNextKeysequences<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Keysequence>}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Returns the first keysequence of every valid keysequence to type the next characters.
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line52">line 52</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    - The valid first keysequences.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Keysequence></span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getNextPossibleKeysequences"><span class="type-signature"></span>getNextPossibleKeysequences<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Keysequence>}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Returns the first keysequences of every possible keysequence taking the current pending inputs into account.
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line60">line 60</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    - The possible first keysequences taking the pending inputs into consideration
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;Keysequence></span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getRestKeysequence"><span class="type-signature"></span>getRestKeysequence<span class="signature">(sequenceChooser<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {ComposedKeysequence}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Returns keysequences from the current position to the end of goal text based on sequence chooser function.
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sequenceChooser</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SequenceChooser</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A sequence chooser function; uses the instance's default if not specified.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line87">line 87</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ComposedKeysequence</span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getRestText"><span class="type-signature"></span>getRestText<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Returns a part of the goal text that are not yet typed.
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line35">line 35</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    - The text that is not typed yet.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isSolved"><span class="type-signature"></span>isSolved<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Returns whether the supplied key inputs are interpreted to be the goal text.
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line131">line 131</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    - True if solved, and false if not.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="supplyKeyInputs"><span class="type-signature"></span>supplyKeyInputs<span class="signature">(keyInputs)</span><span class="type-signature"> &rarr; {null|KeystrokesInterpretation}</span></h4>
+
+    
+
+
+
+    <div class="description">
+        Supply key inputs as an answer.
+If the given key inputs is invalid as an answer to the goal text, this method does nothing and returns null.
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
+        <strong>Parameters:</strong>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>keyInputs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Key inputs to supply.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class="details-item-container">
+            <dt class="tag-source">Source:</dt>
+            <dd class="tag-source"><ul class="dummy"><li>
+                <a href="question.js.html">question.js</a>, <a href="question.js.html#line97">line 97</a>
+            </li></ul></dd>
+        </div>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="method-member-container mt-20">
+    <strong>Returns:</strong>
+        
+            
+<div class="param-desc">
+    The interpretation of the given key inputs, or null if the inputs are not accepted.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">null</span>
+|
+
+<span class="param-type">KeystrokesInterpretation</span>
+
+
+    </dd>
+</dl>
+ 
+    </div>
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+  
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script>
+var list = [{"title":"ComposedKeysequence","link":"<a href=\"module-msime-ja.ComposedKeysequence.html\">ComposedKeysequence</a>"},{"title":"KeystrokesInterpretation","link":"<a href=\"module-msime-ja.KeystrokesInterpretation.html\">KeystrokesInterpretation</a>"},{"title":"Keysequence","link":"<a href=\"module-msime-ja-Keysequence.html\">Keysequence</a>"},{"title":"Question","link":"<a href=\"module-question.Question.html\">Question</a>"},{"title":"module:question.Question#acceptsKeyInputs","link":"<a href=\"module-question.Question.html#acceptsKeyInputs\">module:question.Question &rtrif; acceptsKeyInputs</a>"},{"title":"module:question.Question#getFirstKeysequencesFrom","link":"<a href=\"module-question.Question.html#getFirstKeysequencesFrom\">module:question.Question &rtrif; getFirstKeysequencesFrom</a>"},{"title":"module:question.Question#getKeysequenceFrom","link":"<a href=\"module-question.Question.html#getKeysequenceFrom\">module:question.Question &rtrif; getKeysequenceFrom</a>"},{"title":"module:question.Question#getNextKeysequences","link":"<a href=\"module-question.Question.html#getNextKeysequences\">module:question.Question &rtrif; getNextKeysequences</a>"},{"title":"module:question.Question#getNextPossibleKeysequences","link":"<a href=\"module-question.Question.html#getNextPossibleKeysequences\">module:question.Question &rtrif; getNextPossibleKeysequences</a>"},{"title":"module:question.Question#getRestKeysequence","link":"<a href=\"module-question.Question.html#getRestKeysequence\">module:question.Question &rtrif; getRestKeysequence</a>"},{"title":"module:question.Question#getRestText","link":"<a href=\"module-question.Question.html#getRestText\">module:question.Question &rtrif; getRestText</a>"},{"title":"module:question.Question#isSolved","link":"<a href=\"module-question.Question.html#isSolved\">module:question.Question &rtrif; isSolved</a>"},{"title":"module:question.Question#supplyKeyInputs","link":"<a href=\"module-question.Question.html#supplyKeyInputs\">module:question.Question &rtrif; supplyKeyInputs</a>"},{"title":"TypingStateMachine","link":"<a href=\"module-state-machine.TypingStateMachine.html\">TypingStateMachine</a>"},{"title":"module:state-machine.TypingStateMachine#supplyKeyInputs","link":"<a href=\"module-state-machine.TypingStateMachine.html#supplyKeyInputs\">module:state-machine.TypingStateMachine &rtrif; supplyKeyInputs</a>"},{"title":"module:state-machine.TypingStateMachine#supplyResolvedKeystrokes","link":"<a href=\"module-state-machine.TypingStateMachine.html#supplyResolvedKeystrokes\">module:state-machine.TypingStateMachine &rtrif; supplyResolvedKeystrokes</a>"},{"title":"msime-ja","link":"<a href=\"module-msime-ja.html\">msime-ja</a>"},{"title":"module:msime-ja.getNextKeysequencesList","link":"<a href=\"module-msime-ja.html#.getNextKeysequencesList\">module:msime-ja.getNextKeysequencesList &rtrif; undefined</a>"},{"title":"module:msime-ja.interpretKeystrokes","link":"<a href=\"module-msime-ja.html#.interpretKeystrokes\">module:msime-ja.interpretKeystrokes &rtrif; undefined</a>"},{"title":"module:msime-ja.sequenceChooser","link":"<a href=\"module-msime-ja.html#.sequenceChooser\">module:msime-ja.sequenceChooser &rtrif; undefined</a>"},{"title":"module:msime-ja~createCharToTrueDict","link":"<a href=\"module-msime-ja.html#~createCharToTrueDict\">module:msime-ja~createCharToTrueDict &rtrif; undefined</a>"},{"title":"question","link":"<a href=\"module-question.html\">question</a>"},{"title":"state-machine","link":"<a href=\"module-state-machine.html\">state-machine</a>"}];
+setupSearch(list)
+</script>
+
+ 
+<script type="text/javascript" src="scripts/misc.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+plugins:
+  - prettier
+
+rules:
+  prettier/prettier: error
+  no-unused-expressions: error
+
+overrides:
+  - files:
+      - "test/*.test.js"
+    rules:
+      no-unused-expressions: off
+
+env:
+  es6: true
+parserOptions:
+  ecmaVersion: 2020
+  sourceType: module
+
+extends:
+  - "plugin:prettier/recommended"
