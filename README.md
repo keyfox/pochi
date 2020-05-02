@@ -2,6 +2,8 @@
 
 The MS-IME Japanese Input emulation library for JavaScript.
 
+- [Documentation](https://keyfox.github.io/pochi/)
+
 ## Examples
 
 ### Keystrokes → text conversion

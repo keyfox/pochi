@@ -64,6 +64,82 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<a href="#pochi" id="pochi" style="color: inherit; text-decoration: none;">
+					<h1>pochi</h1>
+				</a>
+				<p>The MS-IME Japanese Input emulation library for JavaScript.</p>
+				<ul>
+					<li><a href="https://keyfox.github.io/pochi/">Documentation</a></li>
+				</ul>
+				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+					<h2>Examples</h2>
+				</a>
+				<a href="#keystrokes-→-text-conversion" id="keystrokes-→-text-conversion" style="color: inherit; text-decoration: none;">
+					<h3>Keystrokes → text conversion</h3>
+				</a>
+				<pre><code class="language-ecma">import { getFirstKeyCombos } from &quot;@keyfox/pochi&quot;;
+
+// Which keys should I type to make the text &quot;にっか&quot;?
+console.log(getFirstKeyCombos(&quot;にっか&quot;));
+// [
+//   [ { chars: &quot;に&quot;, strokes: &quot;ni&quot;, attrs: 8 } ]
+// ]
+// // the return value above indicates there is one solution
+// // which is to type &quot;ni&quot; to resolve &quot;に&quot;.
+
+// After hitting the key &quot;n&quot; and &quot;i&quot;, which key should I type next?
+console.log(getNextKeysequencesList(&quot;っか&quot;));
+// [
+//   [ { chars: &quot;っ&quot;, strokes: &quot;ltu&quot;, attrs: 8 } ],
+//   [ { chars: &quot;っ&quot;, strokes: &quot;xtu&quot;, attrs: 8 } ],
+//   [ { chars: &quot;っ&quot;, strokes: &quot;ltsu&quot;, attrs: 8 } ],
+//   [
+//     { chars: &quot;っ&quot;, strokes: &quot;c&quot;, attrs: 2 },
+//     { chars: &quot;か&quot;, strokes: &quot;ca&quot;, attrs: 2 },
+//   ],
+//   [
+//     { chars: &quot;っ&quot;, strokes: &quot;k&quot;, attrs: 2 },
+//     { chars: &quot;か&quot;, strokes: &quot;ka&quot;, attrs: 2 },
+//   ],
+// ]
+// TL;DR: You have 5 options. Type &quot;ltu&quot;, &quot;xtu&quot; or &quot;ltsu&quot; to resolve &quot;っ&quot;,
+//        or type &quot;kka&quot; or &quot;cca&quot; to resolve &quot;っか&quot;.</code></pre>
+				<a href="#typing-state-machine" id="typing-state-machine" style="color: inherit; text-decoration: none;">
+					<h3>Typing state machine</h3>
+				</a>
+				<pre><code class="language-ecma">import { TypingStateMachine } from &quot;@keyfox/pochi&quot;;
+const stateMachine = new TypingStateMachine();
+
+// Supply one keystroke
+stateMachine.supplyKeystrokes(&quot;a&quot;);
+console.log(stateMachine.text); // &quot;あ&quot;
+
+// MS-IME input keystrokes are available
+stateMachine.supplyKeystrokes(&quot;yi&quot;); // &quot;yi&quot; resolves into &quot;い&quot;
+console.log(stateMachine.text);     // &quot;あい&quot;
+
+// Supply several keystrokes
+stateMachine.supplyKeystrokes(&quot;shite&quot;);
+console.log(stateMachine.text); // &quot;あいして&quot;
+
+// Supply an indeterministic keystroke
+stateMachine.supplyKeystrokes(&quot;r&quot;);
+console.log(stateMachine.text);               // &quot;あいしてr&quot;
+console.log(stateMachine.resolvedText);       // &quot;あいして&quot;
+console.log(stateMachine.resolvedKeystrokes); // &quot;ayishite&quot;
+console.log(stateMachine.pendingKeystroke);   // &quot;r&quot;
+
+// Keystrokes can be tracked anytime
+stateMachine.supplyKeystroke(&quot;u&quot;);
+console.log(stateMachine.text); // &quot;あいしてる&quot;
+console.log(stateMachine.keyCombos);
+// [
+//   [ { chars: &quot;あ&quot;, strokes: &quot;a&quot; } ],
+//   [ { chars: &quot;い&quot;, strokes: &quot;yi&quot; } ],
+//   [ { chars: &quot;し&quot;, strokes: &quot;shi&quot; } ],
+//   [ { chars: &quot;て&quot;, strokes: &quot;te&quot; } ],
+//   [ { chars: &quot;る&quot;, strokes: &quot;ru&quot; } ],
+// ]</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
