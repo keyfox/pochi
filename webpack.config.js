@@ -9,8 +9,8 @@ module.exports = {
   context: `${__dirname}/src/`,
 
   entry: {
-    [`pochi-v${version}`]: "./index.js",
-    [`pochi-v${version}.min`]: "./index.js",
+    [`pochi-v${version}`]: "./index.ts",
+    [`pochi-v${version}.min`]: "./index.ts",
   },
 
   output: {
@@ -24,13 +24,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: `${__dirname}/node_modules`,
-        use: "babel-loader",
+        use: "ts-loader",
       },
     ],
   },
-
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
   performance: { hints: false },
 
   optimization: {

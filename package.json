@@ -17,11 +17,6 @@
     "generate-docs": "rm -rf ./docs/* && typedoc --stripInternal --out ./docs ./src"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/node": "^7.8.7",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/register": "^7.9.0",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -34,6 +29,7 @@
     "mocha": "^7.1.2",
     "nyc": "^15.0.1",
     "prettier": "^2.0.5",
+    "ts-loader": "^7.0.2",
     "ts-node": "^8.9.1",
     "typedoc": "^0.17.6",
     "typescript": "^3.8.3",
