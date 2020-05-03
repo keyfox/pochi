@@ -635,6 +635,20 @@ describe("msime-ja", () => {
         "",
       ],
       [
+        "hokkaidou",
+        [
+          [["ho", "ほ", ATTRS.PREF_FACTOR]],
+          [
+            ["k", "っ", ATTRS.CONSONANT_PREFIX],
+            ["ka", "か", ATTRS.PREF_FACTOR],
+          ],
+          [["i", "い", ATTRS.PREF_FACTOR]],
+          [["do", "ど", ATTRS.PREF_FACTOR]],
+          [["u", "う", ATTRS.PREF_FACTOR]],
+        ],
+        "",
+      ],
+      [
         "170senchi74kiro",
         [
           [["1", "1", ATTRS.UNDEFINED]],
@@ -675,7 +689,7 @@ describe("msime-ja", () => {
 
     for (let testCase of TEST_CASES) {
       const [src, resolvers, pending] = testCase;
-      it(`resolves "${src}" => "${resolvers.map((e) => e[1]).join("")}"${
+      it(`resolves "${src}" => "${resolvers.map((e) => e.map((e) => e[1])).join("")}"${
         pending !== "" ? ` and "${pending}"` : ""
       }`, () => {
         expect(parseKeystrokes(src)).to.deep.equal({
