@@ -66,6 +66,22 @@ describe("TypingStateMachine", () => {
       expect(q.resolvedText).not.to.equal("しゃいん");
       expect(q.pendingKeystrokes).to.equal("n");
     });
+
+    it("does same behaviours no matter how keystrokes are supplied", () => {
+      for (const keystrokes of ["irohanihoheto", "hokkaidou", "shinkansenn"]) {
+        const allAtOnce = new TypingStateMachine();
+        const keyByKey = new TypingStateMachine();
+        allAtOnce.supplyKeystrokes(keystrokes);
+        for (let i = 0, j = keystrokes.length; i < j; ++i) {
+          keyByKey.supplyKeystrokes(keystrokes.charAt(i));
+        }
+        expect(allAtOnce.keyCombos).to.deep.equal(keyByKey.keyCombos);
+        expect(allAtOnce.parsedKeystrokes).to.deep.equal(keyByKey.parsedKeystrokes);
+        expect(allAtOnce.resolvedText).to.deep.equal(keyByKey.resolvedText);
+        expect(allAtOnce.resolvedKeystrokes).to.deep.equal(keyByKey.resolvedKeystrokes);
+        expect(allAtOnce.pendingKeystrokes).to.deep.equal(keyByKey.pendingKeystrokes);
+      }
+    });
   });
 
   const TEST_CASES: [string, [string, string[][], string]][] = [
