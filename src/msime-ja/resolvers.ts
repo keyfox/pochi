@@ -27,17 +27,21 @@ export enum Attrs {
    */
   UNDEFINED = 1,
   /**
+   * Indicates that the solver works as a part of key combo only if followed by certain solver.
+   */
+  DEPENDENT = 1 << 1,
+  /**
    * Indicates that the solver contains dependent consonants.
    */
-  DEPENDENT_CONSONANT = 1 << 1,
+  CONSONANT_PREFIX = Attrs.DEPENDENT | (1 << 2),
   /**
    * Indicates that the solver contains a single `n` that resolves `ん`.
    */
-  SINGLE_N = 1 << 2,
+  SINGLE_N = Attrs.DEPENDENT | (1 << 3),
   /**
    * Indicates that the solver works as a preference factor.
    */
-  PREF_FACTOR = 1 << 3,
+  PREF_FACTOR = 1 << 4,
 }
 
 /**
@@ -131,6 +135,6 @@ export const DEPENDENT_CONSONANT_SOLVERS: readonly MSIMESolver[] = Object.freeze
   CONSONANT_SOLVERS.map((e) => ({
     chars: e.chars,
     strokes: e.strokes.charAt(0),
-    attrs: Attrs.DEPENDENT_CONSONANT,
+    attrs: Attrs.CONSONANT_PREFIX,
   }))
 );

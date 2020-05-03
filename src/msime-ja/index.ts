@@ -187,7 +187,7 @@ export function getFirstKeyCombos(goal: string): MSIMEKeyCombo[] {
             {
               chars: "っ",
               strokes: restFirstKeyCombo[0].strokes.charAt(0),
-              attrs: Attrs.DEPENDENT_CONSONANT,
+              attrs: Attrs.CONSONANT_PREFIX,
             },
             0,
             consonantsLen
@@ -232,11 +232,11 @@ export function keyComboChooser(prefs = DEFAULT_PREFS): KeyComboChooser {
       const preferred = prefFactor && prefFactor.strokes === prefs.byChars?.[prefFactor.chars];
 
       const attrs: Attrs = k.reduce(
-        (acc, f) => acc | (f.attrs & (Attrs.SINGLE_N | Attrs.DEPENDENT_CONSONANT)),
+        (acc, f) => acc | (f.attrs & (Attrs.SINGLE_N | Attrs.CONSONANT_PREFIX)),
         Attrs.NONE
       );
-      const singleN = (attrs & Attrs.SINGLE_N) !== 0;
-      const dependentConsonants = (attrs & Attrs.DEPENDENT_CONSONANT) !== 0;
+      const singleN = (attrs & Attrs.SINGLE_N) === Attrs.SINGLE_N;
+      const dependentConsonants = (attrs & Attrs.CONSONANT_PREFIX) === Attrs.CONSONANT_PREFIX;
       if ((singleN && !acceptSingleN) || (dependentConsonants && !acceptDependentConsonant)) {
         return acc;
       }
@@ -283,7 +283,7 @@ export function parseKeystrokes(keystrokes: string): ParsedKeystrokes {
         const nextChar = keystrokes.charAt(0);
         if (pending === nextChar && !AIUEON_TRUE_DICT[nextChar]) {
           // the next character is meant to solve `っ`
-          combo.push({ chars: "っ", strokes: pending, attrs: Attrs.DEPENDENT_CONSONANT });
+          combo.push({ chars: "っ", strokes: pending, attrs: Attrs.CONSONANT_PREFIX });
         } else {
           // the next character is undefined
           resolvedCombos.push(new MSIMEKeyCombo({ chars: pending, strokes: pending, attrs: Attrs.UNDEFINED }));

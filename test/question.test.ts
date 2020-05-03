@@ -61,7 +61,7 @@ describe("Question", () => {
         [{ chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR }],
         [{ chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR }],
         [
-          { chars: "っ", strokes: "t", attrs: ATTRS.DEPENDENT_CONSONANT },
+          { chars: "っ", strokes: "t", attrs: ATTRS.CONSONANT_PREFIX },
           { chars: "た", strokes: "ta", attrs: ATTRS.PREF_FACTOR },
         ],
       ]);
