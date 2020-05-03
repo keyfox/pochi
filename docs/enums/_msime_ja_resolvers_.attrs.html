@@ -83,7 +83,8 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#dependent_consonant" class="tsd-kind-icon">DEPENDENT_<wbr>CONSONANT</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#consonant_prefix" class="tsd-kind-icon">CONSONANT_<wbr>PREFIX</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#dependent" class="tsd-kind-icon">DEPENDENT</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#none" class="tsd-kind-icon">NONE</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#pref_factor" class="tsd-kind-icon">PREF_<wbr>FACTOR</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#single_n" class="tsd-kind-icon">SINGLE_<wbr>N</a></li>
@@ -96,9 +97,24 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Enumeration members</h2>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="dependent_consonant" class="tsd-anchor"></a>
-					<h3>DEPENDENT_<wbr>CONSONANT</h3>
-					<div class="tsd-signature tsd-kind-icon">DEPENDENT_<wbr>CONSONANT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 1</span></div>
+					<a name="consonant_prefix" class="tsd-anchor"></a>
+					<h3>CONSONANT_<wbr>PREFIX</h3>
+					<div class="tsd-signature tsd-kind-icon">CONSONANT_<wbr>PREFIX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = Attrs.DEPENDENT | (1 &lt;&lt; 2)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/msime-ja/resolvers.ts:36</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Indicates that the solver contains dependent consonants.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="dependent" class="tsd-anchor"></a>
+					<h3>DEPENDENT</h3>
+					<div class="tsd-signature tsd-kind-icon">DEPENDENT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 1</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in src/msime-ja/resolvers.ts:32</li>
@@ -106,7 +122,7 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Indicates that the solver contains dependent consonants.</p>
+							<p>Indicates that the solver works as a part of key combo only if followed by certain solver.</p>
 						</div>
 					</div>
 				</section>
@@ -128,10 +144,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
 					<a name="pref_factor" class="tsd-anchor"></a>
 					<h3>PREF_<wbr>FACTOR</h3>
-					<div class="tsd-signature tsd-kind-icon">PREF_<wbr>FACTOR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 3</span></div>
+					<div class="tsd-signature tsd-kind-icon">PREF_<wbr>FACTOR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 4</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/resolvers.ts:40</li>
+							<li>Defined in src/msime-ja/resolvers.ts:44</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -143,10 +159,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
 					<a name="single_n" class="tsd-anchor"></a>
 					<h3>SINGLE_<wbr>N</h3>
-					<div class="tsd-signature tsd-kind-icon">SINGLE_<wbr>N<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 2</span></div>
+					<div class="tsd-signature tsd-kind-icon">SINGLE_<wbr>N<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = Attrs.DEPENDENT | (1 &lt;&lt; 3)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/resolvers.ts:36</li>
+							<li>Defined in src/msime-ja/resolvers.ts:40</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -206,7 +222,10 @@
 						<a href="_msime_ja_resolvers_.attrs.html" class="tsd-kind-icon">Attrs</a>
 						<ul>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="_msime_ja_resolvers_.attrs.html#dependent_consonant" class="tsd-kind-icon">DEPENDENT_<wbr>CONSONANT</a>
+								<a href="_msime_ja_resolvers_.attrs.html#consonant_prefix" class="tsd-kind-icon">CONSONANT_<wbr>PREFIX</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="_msime_ja_resolvers_.attrs.html#dependent" class="tsd-kind-icon">DEPENDENT</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 								<a href="_msime_ja_resolvers_.attrs.html#none" class="tsd-kind-icon">NONE</a>
