@@ -1,4 +1,5 @@
 import { MSIMEKeyCombo, ParsedKeystrokes, parseKeystrokes } from "./msime-ja/index";
+import { Attrs } from "./msime-ja/resolvers";
 
 /**
  * Class representing a typing state machine.
@@ -49,7 +50,16 @@ export class TypingStateMachine {
         with the current pending keystrokes (${this._pendingKeystrokes})`
       );
     }
-    this._keyCombos = [...this._keyCombos, ...resolved];
+    const lastKeyCombo = this._keyCombos[this._keyCombos.length - 1];
+    if (lastKeyCombo && (lastKeyCombo[lastKeyCombo.length - 1].attrs & Attrs.DEPENDENT) === Attrs.DEPENDENT) {
+      // if the last solver in the last key combo is dependent,
+      // then concatenate the newly resolved key combo into the last key combo
+      lastKeyCombo.push(...resolved[0]);
+      this._keyCombos.push(...resolved.slice(1));
+    } else {
+      this._keyCombos.push(...resolved);
+    }
+
     this._pendingKeystrokes = pending;
     resolved.forEach((e: MSIMEKeyCombo) => {
       this._resolvedText += e.chars;
