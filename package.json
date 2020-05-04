@@ -2,7 +2,7 @@
   "name": "@keyfox/pochi",
   "description": "The MS-IME Japanese Input emulation library for JavaScript",
   "author": "Keyfox",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": "https://github.com/keyfox/pochi.git",
@@ -14,7 +14,7 @@
     "test": "mocha -r ts-node/register --ui bdd ./test/**/*.test.ts",
     "cover": "nyc npm run test",
     "lint": "eslint --ext .ts ./src",
-    "generate-docs": "rm -rf ./docs/* && typedoc --stripInternal --out ./docs ./src && touch ./docs/.nojekyll"
+    "generate-docs": "rm -rf ./docs && typedoc --stripInternal --out ./docs ./src && touch ./docs/.nojekyll"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
