@@ -5,7 +5,7 @@ import {
   MSIMEKeyCombo,
   ParsedKeystrokes,
   parseKeystrokes,
-} from "./msime-ja/index";
+} from "./msime-ja";
 import { TypingStateMachine } from "./state-machine";
 
 /**
