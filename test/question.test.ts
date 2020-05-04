@@ -195,6 +195,14 @@ describe("Question", () => {
     });
   });
 
+  it("reject invalid input", () => {
+    const q = new Question("あらしがすぎたあとに");
+    expect(() => q.supplyKeystrokes("a")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("r")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("a")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("g")).to.throw(RangeError, "unacceptable");
+  });
+
   it("works well", () => {
     const q = new Question("あいうえお");
     expect(q.getRestText()).to.equal("あいうえお");

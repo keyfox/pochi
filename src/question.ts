@@ -97,11 +97,12 @@ export class Question extends TypingStateMachine {
 
   /**
    * Supply keystrokes as an answer.
-   * If the given keystrokes is invalid as an answer to the goal text, this method does nothing and returns null.
+   * If the given keystrokes is invalid as an answer to the goal text, throws a RangeError.
    * @param keystrokes - Keystrokes to supply.
-   * @return Parsing result of the given keystrokes, or null if the keystrokes are invalid.
+   * @return Parsing result of the given keystrokes.
    */
   supplyKeystrokes(keystrokes: string): ParsedKeystrokes {
+    // Check for both resolved part and pending part
     const resolvedKeystrokes = parseKeystrokes(this.pendingKeystrokes + keystrokes);
     if (!this._acceptsResolvedKeystrokes(resolvedKeystrokes)) {
       throw new RangeError(`unacceptable input: ${keystrokes}`);
@@ -127,8 +128,14 @@ export class Question extends TypingStateMachine {
    * @internal
    */
   _acceptsResolvedKeystrokes(keystrokes: ParsedKeystrokes): boolean {
-    const challenge = keystrokes.resolved.map((e: MSIMEKeyCombo) => e.chars).join("");
-    return this.getRestText().startsWith(challenge);
+    const textToResolve = keystrokes.resolved.map((e: MSIMEKeyCombo) => e.chars).join("");
+    return (
+      this.getRestText().startsWith(textToResolve) &&
+      (!keystrokes.pending ||
+        this.getFirstKeyCombosFrom(this.resolvedText.length + textToResolve.length).some((e) =>
+          e.strokes.startsWith(keystrokes.pending)
+        ))
+    );
   }
 
   /**
