@@ -82,6 +82,15 @@ describe("TypingStateMachine", () => {
         expect(allAtOnce.pendingKeystrokes).to.deep.equal(keyByKey.pendingKeystrokes);
       }
     });
+
+    it("won't throw RangeError when no conflict", () => {
+      const q = new TypingStateMachine();
+      q.supplyKeystrokes("sy");
+      expect(q.pendingKeystrokes).to.equal("sy");
+      expect(() => {
+        q.supplyKeystrokes("s");
+      }).not.to.throw(RangeError);
+    });
   });
 
   const TEST_CASES: [string, [string, string[][], string]][] = [
@@ -92,6 +101,8 @@ describe("TypingStateMachine", () => {
     ["shinkaxnsenn", ["しんかんせん", [["shi"], ["n", "ka"], ["xn"], ["se"], ["nn"]], ""]],
     ["bidan", ["びだ", [["bi"], ["da"]], "n"]],
     ["bidann", ["びだん", [["bi"], ["da"], ["nn"]], ""]],
+    ["1jikann", ["１じかん", [["1"], ["ji"], ["ka"], ["nn"]], ""]],
+    ["sysyu", ["ｓｙしゅ", [["s"], ["y"], ["syu"]], ""]],
   ];
 
   describe("currentInterpretation", () => {

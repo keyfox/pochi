@@ -687,6 +687,16 @@ describe("msime-ja", () => {
         ],
         "",
       ],
+
+      [
+        "sysyu",
+        [
+          [["s", "ｓ", Attrs.FALLBACK_ALPHABET]],
+          [["y", "ｙ", Attrs.FALLBACK_ALPHABET]],
+          [["syu", "しゅ", Attrs.PREF_FACTOR]],
+        ],
+        "",
+      ],
     ];
 
     for (let testCase of TEST_CASES) {
