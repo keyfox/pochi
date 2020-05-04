@@ -18,7 +18,7 @@ describe("TypingStateMachine", () => {
     });
   });
 
-  describe("#supplyKeyInput", () => {
+  describe("#supplyKeystrokes", () => {
     it("does nothing for empty key input", () => {
       const q = new TypingStateMachine();
       q.supplyKeystrokes("");
@@ -105,7 +105,7 @@ describe("TypingStateMachine", () => {
     ["sysyu", ["ｓｙしゅ", [["s"], ["y"], ["syu"]], ""]],
   ];
 
-  describe("currentInterpretation", () => {
+  describe("parsedKeystrokes", () => {
     for (let [src, [resolvedText, strokes, pending]] of TEST_CASES) {
       it(`handles "${src}"`, () => {
         const q = new TypingStateMachine();

@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { getFirstKeyCombos as getNextKeyseqsList, keyComboChooser, parseKeystrokes } from "../src/msime-ja";
+import { getFirstKeyCombos, keyComboChooser, parseKeystrokes } from "../src/msime-ja";
 import { DETERMINISTIC_KEYSTROKES_TO_CHARS } from "../src/msime-ja/keystrokes";
 import { Attrs } from "../src/msime-ja/resolvers";
 
@@ -18,7 +18,7 @@ const CHARS_TO_DETERMINISTIC_KEYSTROKES_LIST = (() => {
 })();
 
 describe("msime-ja", () => {
-  describe("DETERMINISTIC_KEYSEQUENCE_TO_CHARS", () => {
+  describe("DETERMINISTIC_KEYSTROKES_TO_CHARS", () => {
     function expectToBeDeterministic(arr: string[]) {
       const keysLen = arr.length;
       for (let i = 0; i < keysLen; ++i) {
@@ -461,7 +461,7 @@ describe("msime-ja", () => {
     ["否", [[{ chars: "否", strokes: "否", attrs: Attrs.UNDEFINED }]]],
   ];
 
-  describe("getNextSequencesList", () => {
+  describe("getFirstKeyCombos", () => {
     for (let testCase of TEST_CASES) {
       const [src, dst] = testCase;
       it(`"${src}" to {${
@@ -472,7 +472,7 @@ describe("msime-ja", () => {
             .join(", ")) ||
         ""
       }}`, () => {
-        const ret = getNextKeyseqsList(src);
+        const ret = getFirstKeyCombos(src);
         expect(ret).to.have.lengthOf(dst.length);
         expect(ret).to.have.deep.members(dst);
       });
@@ -480,7 +480,7 @@ describe("msime-ja", () => {
   });
 
   describe("keyComboChooser", () => {
-    const candidates_u = getNextKeyseqsList("う");
+    const candidates_u = getFirstKeyCombos("う");
     const defaultChooser = keyComboChooser();
 
     it("raises TypeError when empty", () => {
@@ -493,7 +493,7 @@ describe("msime-ja", () => {
     });
 
     it("choose preffered one", () => {
-      const candidates_shi = getNextKeyseqsList("し");
+      const candidates_shi = getFirstKeyCombos("し");
       const shiChooser = keyComboChooser({ byChars: { し: "shi" } });
       expect(shiChooser(candidates_shi)).to.have.property("strokes", "shi");
       const siChooser = keyComboChooser({ byChars: { し: "si" } });
@@ -518,7 +518,7 @@ describe("msime-ja", () => {
     });
 
     it("respects single N preference", () => {
-      const candidates_nda = getNextKeyseqsList("んだ");
+      const candidates_nda = getFirstKeyCombos("んだ");
 
       const chosenAcceptive = keyComboChooser({ acceptSingleN: true })(candidates_nda);
       expect(chosenAcceptive).to.have.property("chars", "んだ");
@@ -532,7 +532,7 @@ describe("msime-ja", () => {
     });
 
     it("respects dependent consonants preference", () => {
-      const candidates_tte = getNextKeyseqsList("って");
+      const candidates_tte = getFirstKeyCombos("って");
 
       const chosenAcceptive = keyComboChooser({
         acceptDependentConsonant: true,
@@ -550,7 +550,7 @@ describe("msime-ja", () => {
     });
 
     it("dependent consonants acceptance precedes ineffective keysequence", () => {
-      const candidates_tte = getNextKeyseqsList("って");
+      const candidates_tte = getFirstKeyCombos("って");
 
       const chosen = keyComboChooser({
         acceptDependentConsonant: true,
@@ -561,7 +561,7 @@ describe("msime-ja", () => {
     });
 
     it("respects preferred keysequence even in dependent consonants", () => {
-      const candidates_sshi = getNextKeyseqsList("っし");
+      const candidates_sshi = getFirstKeyCombos("っし");
       const basePrefs = { acceptDependentConsonant: true };
 
       expect(keyComboChooser({ ...basePrefs, byChars: { し: "shi" } })(candidates_sshi)).to.have.property(
