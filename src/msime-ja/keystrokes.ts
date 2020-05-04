@@ -378,7 +378,7 @@ export const ALPHABET_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
  * @internal
  */
 export const DETERMINISTIC_KEYSTROKES_TO_CHARS: KeystrokesToChars = ((): KeystrokesToChars => {
-  const val = { ...KEYSTROKES_TO_CHARS };
+  const val = { ...KEYSTROKES_TO_CHARS, ...SYMBOL_KEYSTROKES_TO_CHARS, ...NUMBER_KEYSTROKES_TO_CHARS };
   // take a shortcut because only this one is indeterministic.
   delete val["n"];
   return Object.freeze<KeystrokesToChars>(val);

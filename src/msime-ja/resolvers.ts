@@ -1,4 +1,9 @@
-import { DETERMINISTIC_KEYSTROKES_TO_CHARS } from "./keystrokes";
+import {
+  DETERMINISTIC_KEYSTROKES_TO_CHARS,
+  KEYSTROKES_TO_CHARS,
+  NUMBER_KEYSTROKES_TO_CHARS,
+  SYMBOL_KEYSTROKES_TO_CHARS,
+} from "./keystrokes";
 
 /**
  * A pair of characters and keystrokes. The keystrokes is resolved to the characters.
@@ -79,12 +84,30 @@ type CharsToSolvers = { [key: string]: MSIMESolver[] };
  */
 export const DETERMINISTIC_KEYSTROKES_TO_SOLVER = Object.freeze<KeystrokesToSolver>(
   ((): KeystrokesToSolver => {
+    const chars = Object.values(DETERMINISTIC_KEYSTROKES_TO_CHARS);
+    function hasMultipleKeystrokes(char: string): boolean {
+      return chars.indexOf(char) !== chars.lastIndexOf(char);
+    }
+    function getAttr(keystrokes: string): Attrs {
+      const char = KEYSTROKES_TO_CHARS[keystrokes];
+      const q = char
+        ? hasMultipleKeystrokes(char)
+          ? Attrs.PREF_FACTOR
+          : Attrs.NONE
+        : NUMBER_KEYSTROKES_TO_CHARS[keystrokes]
+        ? Attrs.NUMBER
+        : SYMBOL_KEYSTROKES_TO_CHARS[keystrokes]
+        ? Attrs.SYMBOL
+        : Attrs.UNDEFINED;
+      return q;
+    }
+
     const ret: KeystrokesToSolver = {};
     Object.keys(DETERMINISTIC_KEYSTROKES_TO_CHARS).forEach((keystrokes) => {
       ret[keystrokes] = Object.freeze<MSIMESolver>({
         chars: DETERMINISTIC_KEYSTROKES_TO_CHARS[keystrokes],
         strokes: keystrokes,
-        attrs: Attrs.PREF_FACTOR,
+        attrs: getAttr(keystrokes),
       });
     });
     return ret;
