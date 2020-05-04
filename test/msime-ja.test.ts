@@ -51,7 +51,7 @@ describe("msime-ja", () => {
     ["", []],
 
     // single pattern
-    ["あ", [[{ chars: "あ", strokes: "a", attrs: ATTRS.PREF_FACTOR }]]],
+    ["あ", [[{ chars: "あ", strokes: "a", attrs: ATTRS.NONE }]]],
 
     // 2 or more pattern
     [
@@ -102,7 +102,7 @@ describe("msime-ja", () => {
             strokes: "t",
             attrs: ATTRS.CONSONANT_PREFIX,
           },
-          { chars: "た", strokes: "ta", attrs: ATTRS.PREF_FACTOR },
+          { chars: "た", strokes: "ta", attrs: ATTRS.NONE },
         ],
         ...CONSONANTS,
       ],
@@ -198,7 +198,7 @@ describe("msime-ja", () => {
             strokes: "t",
             attrs: ATTRS.CONSONANT_PREFIX,
           },
-          { chars: "た", strokes: "ta", attrs: ATTRS.PREF_FACTOR },
+          { chars: "た", strokes: "ta", attrs: ATTRS.NONE },
         ],
         ...CONSONANTS,
       ],
@@ -313,7 +313,7 @@ describe("msime-ja", () => {
             strokes: "t",
             attrs: ATTRS.CONSONANT_PREFIX,
           },
-          { chars: "て", strokes: "te", attrs: ATTRS.PREF_FACTOR },
+          { chars: "て", strokes: "te", attrs: ATTRS.NONE },
         ],
       ],
     ],
@@ -417,16 +417,18 @@ describe("msime-ja", () => {
             strokes: "t",
             attrs: ATTRS.CONSONANT_PREFIX,
           },
-          { chars: "て", strokes: "te", attrs: ATTRS.PREF_FACTOR },
+          { chars: "て", strokes: "te", attrs: ATTRS.NONE },
         ],
       ],
     ],
     // when the goal is terminated `ん`, then we have to type `n` explicitly
     ["ん", EXPLICIT_N],
 
+    // symbols and numbers
+    ["ー", [[{ chars: "ー", strokes: "-", attrs: ATTRS.SYMBOL }]]],
+    ["１", [[{ chars: "１", strokes: "1", attrs: ATTRS.NUMBER }]]],
+
     // if any undefined key is supplied, then just return it
-    ["ー", [[{ chars: "ー", strokes: "ー", attrs: ATTRS.UNDEFINED }]]],
-    ["１", [[{ chars: "１", strokes: "１", attrs: ATTRS.UNDEFINED }]]],
     ["a", [[{ chars: "a", strokes: "a", attrs: ATTRS.UNDEFINED }]]],
   ];
 
@@ -549,7 +551,7 @@ describe("msime-ja", () => {
       // resolves nothing when the input is empty
       ["", [], ""],
       // anything resolved will be put into an array, and others will be returned as a string
-      ["a", [[["a", "あ", ATTRS.PREF_FACTOR]]], ""],
+      ["a", [[["a", "あ", ATTRS.NONE]]], ""],
       ["b", [], "b"],
       ["ka", [[["ka", "か", ATTRS.PREF_FACTOR]]], ""],
       ["kak", [[["ka", "か", ATTRS.PREF_FACTOR]]], "k"],
@@ -559,7 +561,7 @@ describe("msime-ja", () => {
         [
           [
             ["t", "っ", ATTRS.CONSONANT_PREFIX],
-            ["ta", "た", ATTRS.PREF_FACTOR],
+            ["ta", "た", ATTRS.NONE],
           ],
         ],
         "",
@@ -570,27 +572,23 @@ describe("msime-ja", () => {
           [
             ["t", "っ", ATTRS.CONSONANT_PREFIX],
             ["t", "っ", ATTRS.CONSONANT_PREFIX],
-            ["ta", "た", ATTRS.PREF_FACTOR],
+            ["ta", "た", ATTRS.NONE],
           ],
         ],
         "",
       ],
       [
         "furess",
-        [
-          [["fu", "ふ", ATTRS.PREF_FACTOR]],
-          [["re", "れ", ATTRS.PREF_FACTOR]],
-          [["s", "っ", ATTRS.CONSONANT_PREFIX]],
-        ],
+        [[["fu", "ふ", ATTRS.PREF_FACTOR]], [["re", "れ", ATTRS.NONE]], [["s", "っ", ATTRS.CONSONANT_PREFIX]]],
         "s",
       ],
       [
         "tatte",
         [
-          [["ta", "た", ATTRS.PREF_FACTOR]],
+          [["ta", "た", ATTRS.NONE]],
           [
             ["t", "っ", ATTRS.CONSONANT_PREFIX],
-            ["te", "て", ATTRS.PREF_FACTOR],
+            ["te", "て", ATTRS.NONE],
           ],
         ],
         "",
@@ -604,7 +602,7 @@ describe("msime-ja", () => {
           [["ka", "か", ATTRS.PREF_FACTOR]],
           [
             ["n", "ん", ATTRS.SINGLE_N],
-            ["ke", "け", ATTRS.PREF_FACTOR],
+            ["ke", "け", ATTRS.NONE],
           ],
           [["i", "い", ATTRS.PREF_FACTOR]],
         ],
@@ -616,18 +614,18 @@ describe("msime-ja", () => {
       [
         "orehajaiangakidaishou",
         [
-          [["o", "お", ATTRS.PREF_FACTOR]],
-          [["re", "れ", ATTRS.PREF_FACTOR]],
-          [["ha", "は", ATTRS.PREF_FACTOR]],
+          [["o", "お", ATTRS.NONE]],
+          [["re", "れ", ATTRS.NONE]],
+          [["ha", "は", ATTRS.NONE]],
           [["ja", "じゃ", ATTRS.PREF_FACTOR]],
           [["i", "い", ATTRS.PREF_FACTOR]],
-          [["a", "あ", ATTRS.PREF_FACTOR]],
+          [["a", "あ", ATTRS.NONE]],
           [
             ["n", "ん", ATTRS.SINGLE_N],
-            ["ga", "が", ATTRS.PREF_FACTOR],
+            ["ga", "が", ATTRS.NONE],
           ],
-          [["ki", "き", ATTRS.PREF_FACTOR]],
-          [["da", "だ", ATTRS.PREF_FACTOR]],
+          [["ki", "き", ATTRS.NONE]],
+          [["da", "だ", ATTRS.NONE]],
           [["i", "い", ATTRS.PREF_FACTOR]],
           [["sho", "しょ", ATTRS.PREF_FACTOR]],
           [["u", "う", ATTRS.PREF_FACTOR]],
@@ -637,13 +635,13 @@ describe("msime-ja", () => {
       [
         "hokkaidou",
         [
-          [["ho", "ほ", ATTRS.PREF_FACTOR]],
+          [["ho", "ほ", ATTRS.NONE]],
           [
             ["k", "っ", ATTRS.CONSONANT_PREFIX],
             ["ka", "か", ATTRS.PREF_FACTOR],
           ],
           [["i", "い", ATTRS.PREF_FACTOR]],
-          [["do", "ど", ATTRS.PREF_FACTOR]],
+          [["do", "ど", ATTRS.NONE]],
           [["u", "う", ATTRS.PREF_FACTOR]],
         ],
         "",
@@ -651,37 +649,41 @@ describe("msime-ja", () => {
       [
         "170senchi74kiro",
         [
-          [["1", "1", ATTRS.UNDEFINED]],
-          [["7", "7", ATTRS.UNDEFINED]],
-          [["0", "0", ATTRS.UNDEFINED]],
+          [["1", "１", ATTRS.NUMBER]],
+          [["7", "７", ATTRS.NUMBER]],
+          [["0", "０", ATTRS.NUMBER]],
           [["se", "せ", ATTRS.PREF_FACTOR]],
           [
             ["n", "ん", ATTRS.SINGLE_N],
             ["chi", "ち", ATTRS.PREF_FACTOR],
           ],
-          [["7", "7", ATTRS.UNDEFINED]],
-          [["4", "4", ATTRS.UNDEFINED]],
-          [["ki", "き", ATTRS.PREF_FACTOR]],
-          [["ro", "ろ", ATTRS.PREF_FACTOR]],
+          [["7", "７", ATTRS.NUMBER]],
+          [["4", "４", ATTRS.NUMBER]],
+          [["ki", "き", ATTRS.NONE]],
+          [["ro", "ろ", ATTRS.NONE]],
         ],
         "",
       ],
       // characters that is not on the basic rules
       [
         "mk2",
-        [[["m", "m", ATTRS.UNDEFINED]], [["k", "k", ATTRS.UNDEFINED]], [["2", "2", ATTRS.UNDEFINED]]],
+        [
+          [["m", "ｍ", ATTRS.FALLBACK_ALPHABET]],
+          [["k", "ｋ", ATTRS.FALLBACK_ALPHABET]],
+          [["2", "２", ATTRS.NUMBER]],
+        ],
         "",
       ],
       // those characters won't make `っ` even if they are typed consecutively
       [
         "mk2222",
         [
-          [["m", "m", ATTRS.UNDEFINED]],
-          [["k", "k", ATTRS.UNDEFINED]],
-          [["2", "2", ATTRS.UNDEFINED]],
-          [["2", "2", ATTRS.UNDEFINED]],
-          [["2", "2", ATTRS.UNDEFINED]],
-          [["2", "2", ATTRS.UNDEFINED]],
+          [["m", "ｍ", ATTRS.FALLBACK_ALPHABET]],
+          [["k", "ｋ", ATTRS.FALLBACK_ALPHABET]],
+          [["2", "２", ATTRS.NUMBER]],
+          [["2", "２", ATTRS.NUMBER]],
+          [["2", "２", ATTRS.NUMBER]],
+          [["2", "２", ATTRS.NUMBER]],
         ],
         "",
       ],

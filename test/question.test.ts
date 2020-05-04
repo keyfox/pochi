@@ -62,7 +62,7 @@ describe("Question", () => {
         [{ chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR }],
         [
           { chars: "っ", strokes: "t", attrs: ATTRS.CONSONANT_PREFIX },
-          { chars: "た", strokes: "ta", attrs: ATTRS.PREF_FACTOR },
+          { chars: "た", strokes: "ta", attrs: ATTRS.NONE },
         ],
       ]);
     });
@@ -75,7 +75,7 @@ describe("Question", () => {
         [{ chars: "ん", strokes: "n'", attrs: ATTRS.PREF_FACTOR }],
         [
           { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
         ],
       ]);
     });
@@ -83,7 +83,7 @@ describe("Question", () => {
     it("respects the start index", () => {
       const q = new Question("んご");
       expect(q.getFirstKeyCombosFrom(1)).to.have.deep.members([
-        [{ chars: "ご", strokes: "go", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "ご", strokes: "go", attrs: ATTRS.NONE }],
       ]);
     });
   });
@@ -133,10 +133,10 @@ describe("Question", () => {
     it("returns a keysequence from the head by default", () => {
       const q = new Question("さんご");
       expect(q.getKeyCombosSequence(0)).to.deep.equal([
-        [{ chars: "さ", strokes: "sa", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "さ", strokes: "sa", attrs: ATTRS.NONE }],
         [
           { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
         ],
       ]);
     });
@@ -146,7 +146,7 @@ describe("Question", () => {
       expect(q.getKeyCombosSequence(1)).to.deep.equal([
         [
           { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
         ],
       ]);
     });
@@ -166,17 +166,17 @@ describe("Question", () => {
     it("takes the current pending input into account", () => {
       const q = new Question("さんご");
       expect(q.getRestKeyCombosSequence()).to.deep.equal([
-        [{ chars: "さ", strokes: "sa", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "さ", strokes: "sa", attrs: ATTRS.NONE }],
         [
           { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
         ],
       ]);
       q.supplyKeystrokes("sa");
       expect(q.getRestKeyCombosSequence()).to.deep.equal([
         [
           { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
         ],
       ]);
     });

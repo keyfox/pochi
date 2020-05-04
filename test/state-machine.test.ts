@@ -165,7 +165,7 @@ describe("TypingStateMachine", () => {
       q.supplyKeystrokes("a");
       expect(q)
         .to.have.property("keyCombos")
-        .that.have.deep.members([[{ chars: "あ", strokes: "a", attrs: ATTRS.PREF_FACTOR }]]);
+        .that.have.deep.members([[{ chars: "あ", strokes: "a", attrs: ATTRS.NONE }]]);
     });
   });
 });
