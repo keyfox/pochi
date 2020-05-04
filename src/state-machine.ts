@@ -1,4 +1,4 @@
-import { MSIMEKeyCombo, ParsedKeystrokes, parseKeystrokes } from "./msime-ja/index";
+import { MSIMEKeyCombo, ParsedKeystrokes, parseKeystrokes } from "./msime-ja";
 import { Attrs } from "./msime-ja/resolvers";
 
 /**

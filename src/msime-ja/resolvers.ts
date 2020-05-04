@@ -1,4 +1,9 @@
-import { DETERMINISTIC_KEYSTROKES_TO_CHARS } from "./keystrokes";
+import {
+  DETERMINISTIC_KEYSTROKES_TO_CHARS,
+  KEYSTROKES_TO_CHARS,
+  NUMBER_KEYSTROKES_TO_CHARS,
+  SYMBOL_KEYSTROKES_TO_CHARS,
+} from "./keystrokes";
 
 /**
  * A pair of characters and keystrokes. The keystrokes is resolved to the characters.
@@ -42,6 +47,18 @@ export enum Attrs {
    * Indicates that the solver works as a preference factor.
    */
   PREF_FACTOR = 1 << 4,
+  /**
+   * Indicates that the solver solves into a symbol.
+   */
+  SYMBOL = 1 << 5,
+  /**
+   * Indicates that the solver solves into a number.
+   */
+  NUMBER = 1 << 6,
+  /**
+   * Indicates that the solver is alphabet which is not regarded as a part of roman letter input
+   */
+  FALLBACK_ALPHABET = 1 << 7,
 }
 
 /**
@@ -53,7 +70,6 @@ export interface MSIMESolver extends Solver {
   attrs: Attrs;
 }
 
-// TODO: Type name could be better
 /**
  * A mapping from keystrokes to the corresponding MSIMESolver instance.
  * @internal
@@ -72,12 +88,30 @@ type CharsToSolvers = { [key: string]: MSIMESolver[] };
  */
 export const DETERMINISTIC_KEYSTROKES_TO_SOLVER = Object.freeze<KeystrokesToSolver>(
   ((): KeystrokesToSolver => {
+    const chars = Object.values(DETERMINISTIC_KEYSTROKES_TO_CHARS);
+    function hasMultipleKeystrokes(char: string): boolean {
+      return chars.indexOf(char) !== chars.lastIndexOf(char);
+    }
+    function getAttr(keystrokes: string): Attrs {
+      const char = KEYSTROKES_TO_CHARS[keystrokes];
+      const q = char
+        ? hasMultipleKeystrokes(char)
+          ? Attrs.PREF_FACTOR
+          : Attrs.NONE
+        : NUMBER_KEYSTROKES_TO_CHARS[keystrokes]
+        ? Attrs.NUMBER
+        : SYMBOL_KEYSTROKES_TO_CHARS[keystrokes]
+        ? Attrs.SYMBOL
+        : Attrs.UNDEFINED;
+      return q;
+    }
+
     const ret: KeystrokesToSolver = {};
     Object.keys(DETERMINISTIC_KEYSTROKES_TO_CHARS).forEach((keystrokes) => {
       ret[keystrokes] = Object.freeze<MSIMESolver>({
         chars: DETERMINISTIC_KEYSTROKES_TO_CHARS[keystrokes],
         strokes: keystrokes,
-        attrs: Attrs.PREF_FACTOR,
+        attrs: getAttr(keystrokes),
       });
     });
     return ret;

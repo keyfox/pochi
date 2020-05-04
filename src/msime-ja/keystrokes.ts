@@ -345,6 +345,32 @@ export const KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze<KeystrokesTo
   xwa: "ゎ",
 });
 
+function zipIntoDict(keys: string, values: string): KeystrokesToChars {
+  if (keys.length !== values.length) {
+    throw new RangeError(`length of keys (${keys.length}) must be equals to that of values (${values.length})`);
+  }
+  const dict: KeystrokesToChars = {};
+  for (let i = 0, j = keys.length; i < j; ++i) {
+    dict[keys.charAt(i)] = values.charAt(i);
+  }
+  return dict;
+}
+
+export const SYMBOL_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
+  zipIntoDict(
+    `!"#$%&'()=~|\`{+*}<>?_-^\\@[;:],./`,
+    "！”＃＄％＆’（）＝～｜｀｛＋＊｝＜＞？＿ー＾￥＠「；：」、。・"
+  )
+);
+
+export const NUMBER_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
+  zipIntoDict(`0123456789`, "０１２３４５６７８９")
+);
+
+export const ALPHABET_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
+  zipIntoDict("abcdefghijklmnopqrstuvwxyz", "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ")
+);
+
 /**
  * A dictionary from *deterministic* keystrokes to characters.
  *
@@ -352,7 +378,7 @@ export const KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze<KeystrokesTo
  * @internal
  */
 export const DETERMINISTIC_KEYSTROKES_TO_CHARS: KeystrokesToChars = ((): KeystrokesToChars => {
-  const val = { ...KEYSTROKES_TO_CHARS };
+  const val = { ...KEYSTROKES_TO_CHARS, ...SYMBOL_KEYSTROKES_TO_CHARS, ...NUMBER_KEYSTROKES_TO_CHARS };
   // take a shortcut because only this one is indeterministic.
   delete val["n"];
   return Object.freeze<KeystrokesToChars>(val);

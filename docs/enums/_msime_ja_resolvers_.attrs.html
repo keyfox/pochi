@@ -85,9 +85,12 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#consonant_prefix" class="tsd-kind-icon">CONSONANT_<wbr>PREFIX</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#dependent" class="tsd-kind-icon">DEPENDENT</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#fallback_alphabet" class="tsd-kind-icon">FALLBACK_<wbr>ALPHABET</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#none" class="tsd-kind-icon">NONE</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#number" class="tsd-kind-icon">NUMBER</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#pref_factor" class="tsd-kind-icon">PREF_<wbr>FACTOR</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#single_n" class="tsd-kind-icon">SINGLE_<wbr>N</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#symbol" class="tsd-kind-icon">SYMBOL</a></li>
 								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_msime_ja_resolvers_.attrs.html#undefined" class="tsd-kind-icon">UNDEFINED</a></li>
 							</ul>
 						</section>
@@ -102,7 +105,7 @@
 					<div class="tsd-signature tsd-kind-icon">CONSONANT_<wbr>PREFIX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = Attrs.DEPENDENT | (1 &lt;&lt; 2)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/resolvers.ts:36</li>
+							<li>Defined in src/msime-ja/resolvers.ts:41</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -117,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">DEPENDENT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 1</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/resolvers.ts:32</li>
+							<li>Defined in src/msime-ja/resolvers.ts:37</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -127,12 +130,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="fallback_alphabet" class="tsd-anchor"></a>
+					<h3>FALLBACK_<wbr>ALPHABET</h3>
+					<div class="tsd-signature tsd-kind-icon">FALLBACK_<wbr>ALPHABET<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 7</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/msime-ja/resolvers.ts:61</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Indicates that the solver is alphabet which is not regarded as a part of roman letter input</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
 					<a name="none" class="tsd-anchor"></a>
 					<h3>NONE</h3>
 					<div class="tsd-signature tsd-kind-icon">NONE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/resolvers.ts:24</li>
+							<li>Defined in src/msime-ja/resolvers.ts:29</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -142,12 +160,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="number" class="tsd-anchor"></a>
+					<h3>NUMBER</h3>
+					<div class="tsd-signature tsd-kind-icon">NUMBER<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 6</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/msime-ja/resolvers.ts:57</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Indicates that the solver solves into a number.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
 					<a name="pref_factor" class="tsd-anchor"></a>
 					<h3>PREF_<wbr>FACTOR</h3>
 					<div class="tsd-signature tsd-kind-icon">PREF_<wbr>FACTOR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 4</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/resolvers.ts:44</li>
+							<li>Defined in src/msime-ja/resolvers.ts:49</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -162,7 +195,7 @@
 					<div class="tsd-signature tsd-kind-icon">SINGLE_<wbr>N<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = Attrs.DEPENDENT | (1 &lt;&lt; 3)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/resolvers.ts:40</li>
+							<li>Defined in src/msime-ja/resolvers.ts:45</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -172,12 +205,27 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="symbol" class="tsd-anchor"></a>
+					<h3>SYMBOL</h3>
+					<div class="tsd-signature tsd-kind-icon">SYMBOL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1 &lt;&lt; 5</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/msime-ja/resolvers.ts:53</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Indicates that the solver solves into a symbol.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
 					<a name="undefined" class="tsd-anchor"></a>
 					<h3>UNDEFINED</h3>
 					<div class="tsd-signature tsd-kind-icon">UNDEFINED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/resolvers.ts:28</li>
+							<li>Defined in src/msime-ja/resolvers.ts:33</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -228,13 +276,22 @@
 								<a href="_msime_ja_resolvers_.attrs.html#dependent" class="tsd-kind-icon">DEPENDENT</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="_msime_ja_resolvers_.attrs.html#fallback_alphabet" class="tsd-kind-icon">FALLBACK_<wbr>ALPHABET</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 								<a href="_msime_ja_resolvers_.attrs.html#none" class="tsd-kind-icon">NONE</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="_msime_ja_resolvers_.attrs.html#number" class="tsd-kind-icon">NUMBER</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 								<a href="_msime_ja_resolvers_.attrs.html#pref_factor" class="tsd-kind-icon">PREF_<wbr>FACTOR</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 								<a href="_msime_ja_resolvers_.attrs.html#single_n" class="tsd-kind-icon">SINGLE_<wbr>N</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="_msime_ja_resolvers_.attrs.html#symbol" class="tsd-kind-icon">SYMBOL</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
 								<a href="_msime_ja_resolvers_.attrs.html#undefined" class="tsd-kind-icon">UNDEFINED</a>
