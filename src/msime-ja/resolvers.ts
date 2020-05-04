@@ -42,6 +42,14 @@ export enum Attrs {
    * Indicates that the solver works as a preference factor.
    */
   PREF_FACTOR = 1 << 4,
+  /**
+   * Indicates that the solver solves into a symbol.
+   */
+  SYMBOL = 1 << 5,
+  /**
+   * Indicates that the solver solves into a number.
+   */
+  NUMBER = 1 << 6,
 }
 
 /**
