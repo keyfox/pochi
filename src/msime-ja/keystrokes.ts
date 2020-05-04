@@ -345,6 +345,28 @@ export const KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze<KeystrokesTo
   xwa: "ゎ",
 });
 
+function zipIntoDict(keys: string, values: string): KeystrokesToChars {
+  if (keys.length !== values.length) {
+    throw new RangeError("length of keys must be equals to that of values");
+  }
+  const dict: KeystrokesToChars = {};
+  for (let i = 0, j = keys.length; i < j; ++i) {
+    dict[keys.charAt(i)] = values.charAt(j);
+  }
+  return dict;
+}
+
+export const SYMBOL_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
+  zipIntoDict(
+    `!"#$%&'()=~|\`{+*}<>?_-^\\@[;:],./`,
+    "！”＃＄％＆’（）＝～｜｀｛＋＊｝＜＞？＿ー＾￥＠「；：」、。・￥"
+  )
+);
+
+export const NUMBER_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
+  zipIntoDict(`1234567890`, "１２３４５６７８９")
+);
+
 /**
  * A dictionary from *deterministic* keystrokes to characters.
  *
