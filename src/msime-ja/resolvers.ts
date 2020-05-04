@@ -1,4 +1,5 @@
 import {
+  ALPHABET_KEYSTROKES_TO_CHARS,
   DETERMINISTIC_KEYSTROKES_TO_CHARS,
   KEYSTROKES_TO_CHARS,
   NUMBER_KEYSTROKES_TO_CHARS,
@@ -83,15 +84,23 @@ type KeystrokesToSolver = { [key: string]: MSIMESolver };
 type CharsToSolvers = { [key: string]: MSIMESolver[] };
 
 /**
+ * A mapping from characters to the single corresponding MSIMESolver instance.
+ * @internal
+ */
+type CharsToSolver = { [key: string]: MSIMESolver };
+
+/**
  * A mapping from deterministic keystrokes to the corresponding MSIMESolver instance.
  * @internal
  */
 export const DETERMINISTIC_KEYSTROKES_TO_SOLVER = Object.freeze<KeystrokesToSolver>(
   ((): KeystrokesToSolver => {
     const chars = Object.values(DETERMINISTIC_KEYSTROKES_TO_CHARS);
+
     function hasMultipleKeystrokes(char: string): boolean {
       return chars.indexOf(char) !== chars.lastIndexOf(char);
     }
+
     function getAttr(keystrokes: string): Attrs {
       const char = KEYSTROKES_TO_CHARS[keystrokes];
       const q = char
@@ -119,6 +128,24 @@ export const DETERMINISTIC_KEYSTROKES_TO_SOLVER = Object.freeze<KeystrokesToSolv
 );
 
 /**
+ * A mapping from deterministic keystrokes to the corresponding MSIMESolver instance.
+ * @internal
+ */
+export const ALPHABET_KEYSTROKES_TO_SOLVER = Object.freeze<KeystrokesToSolver>(
+  ((): KeystrokesToSolver => {
+    const ret: KeystrokesToSolver = {};
+    Object.keys(ALPHABET_KEYSTROKES_TO_CHARS).forEach((keystrokes) => {
+      ret[keystrokes] = Object.freeze<MSIMESolver>({
+        chars: ALPHABET_KEYSTROKES_TO_CHARS[keystrokes],
+        strokes: keystrokes,
+        attrs: Attrs.FALLBACK_ALPHABET,
+      });
+    });
+    return ret;
+  })()
+);
+
+/**
  * A mapping from characters to the corresponding MSIMESolver instances.
  * @internal
  */
@@ -137,6 +164,18 @@ export const CHARS_TO_SOLVERS: CharsToSolvers = Object.freeze(
     Object.keys(ret).forEach((k) => Object.freeze<MSIMESolver[]>(ret[k]));
     return ret;
   })()
+);
+
+/**
+ * A mapping from characters to the corresponding MSIMESolver instances.
+ * @internal
+ */
+export const ALPHABET_CHARS_TO_SOLVER: CharsToSolver = Object.freeze(
+  Object.keys(ALPHABET_KEYSTROKES_TO_CHARS).reduce<{ [key: string]: MSIMESolver }>((dict, keystrokes) => {
+    const chars = ALPHABET_KEYSTROKES_TO_CHARS[keystrokes];
+    dict[chars] = ALPHABET_KEYSTROKES_TO_SOLVER[keystrokes];
+    return dict;
+  }, {})
 );
 
 /**

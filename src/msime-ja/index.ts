@@ -1,5 +1,7 @@
-import { ALPHABET_KEYSTROKES_TO_CHARS, DETERMINISTIC_KEYSTROKES_TO_CHARS } from "./keystrokes";
+import { DETERMINISTIC_KEYSTROKES_TO_CHARS } from "./keystrokes";
 import {
+  ALPHABET_CHARS_TO_SOLVER,
+  ALPHABET_KEYSTROKES_TO_SOLVER,
   Attrs,
   CHARS_TO_SOLVERS,
   CONSONANT_SOLVERS,
@@ -51,6 +53,7 @@ class KeyCombo<T extends Solver> extends Array<T> implements Solver {
     // cf. https://stackoverflow.com/questions/41592985/typescript-arrayt-inheritance/43756390#43756390
     Object.setPrototypeOf(this, new.target.prototype);
   }
+
   /**
    * Characters which this key combo builds.
    */
@@ -145,9 +148,14 @@ export function getFirstKeyCombos(goal: string): MSIMEKeyCombo[] {
   const headChar = goal.charAt(0);
 
   if (firstKeyCombos.length === 0) {
-    // - Returns the given character if the key combo for it is not defined
-    // - Returns empty dict if the goal is empty
-    firstKeyCombos.push(new MSIMEKeyCombo({ chars: headChar, strokes: headChar, attrs: Attrs.UNDEFINED }));
+    const alphabetSolver = ALPHABET_CHARS_TO_SOLVER[headChar];
+    if (alphabetSolver) {
+      // Returns a key combo that just contains one alphabet
+      firstKeyCombos.push(new MSIMEKeyCombo(alphabetSolver));
+    } else {
+      // or returns the given character if the key combo for it is not defined
+      firstKeyCombos.push(new MSIMEKeyCombo({ chars: headChar, strokes: headChar, attrs: Attrs.UNDEFINED }));
+    }
   } else if (headChar === "ん") {
     // If the goal begins with `ん` and the key combo for the text following `ん` is
     // something other than /[aiueon]/, then `ん` can be resolved with the single `n`.
@@ -158,7 +166,7 @@ export function getFirstKeyCombos(goal: string): MSIMEKeyCombo[] {
         firstKeyCombos.push(keyCombo);
       }
     });
-  } else {
+  } else if (headChar === "っ") {
     // If the goal begins with (perhaps consecutive) `っ`
     // and they are followed by at least 1 character other than `/[あ-おな-のん]/`,
     // the consonants can be resolved by double-pressing the first keystroke of the next character.
@@ -264,12 +272,52 @@ export interface ParsedKeystrokes {
   pending: string;
 }
 
+function terminatePendingKeystrokes(
+  pending: string,
+  restKeystrokes: string
+): {
+  append?: MSIMESolver;
+  resolvedCombo?: MSIMEKeyCombo;
+} {
+  {
+    // Resolve the pending character anyway assuming there is further text
+    if (pending === "n") {
+      return {
+        append: SINGLE_N_SOLVER,
+      };
+    } else {
+      const nextChar = restKeystrokes.charAt(0);
+      if (pending === nextChar && !AIUEON_TRUE_DICT[nextChar]) {
+        // the pending character is meant to solve `っ`
+        return {
+          append: { chars: "っ", strokes: pending, attrs: Attrs.CONSONANT_PREFIX },
+        };
+      } else {
+        // the pending character was considered as a part of roman letter input,
+        // but actually it is not
+        const solver = ALPHABET_KEYSTROKES_TO_SOLVER[pending];
+        return {
+          resolvedCombo: new MSIMEKeyCombo(solver),
+        };
+      }
+    }
+  }
+}
+
 /**
  * Parse the given keystrokes.
  * @param keystrokes - Keystrokes to parse.
+ * @param terminatePending - Whether to solve the pending keystrokes anyway.
  * @return Keystrokes of resolved part and pending part.
  */
-export function parseKeystrokes(keystrokes: string): ParsedKeystrokes {
+export function parseKeystrokes(
+  keystrokes: string,
+  {
+    terminatePending = false,
+  }: {
+    terminatePending?: boolean;
+  } = {}
+): ParsedKeystrokes {
   const resolvedCombos: MSIMEKeyCombo[] = [];
   let pending = "";
 
@@ -277,23 +325,13 @@ export function parseKeystrokes(keystrokes: string): ParsedKeystrokes {
   while (keystrokes !== "") {
     if (combo && pending !== "") {
       // Resolve the pending character anyway assuming there is further text
-      if (pending === "n") {
-        combo.push(SINGLE_N_SOLVER);
-      } else {
-        const nextChar = keystrokes.charAt(0);
-        if (pending === nextChar && !AIUEON_TRUE_DICT[nextChar]) {
-          // the pending character is meant to solve `っ`
-          combo.push({ chars: "っ", strokes: pending, attrs: Attrs.CONSONANT_PREFIX });
-        } else {
-          // the pending character was considered as a part of roman letter input,
-          // but actually it is not
-          const alphabet = ALPHABET_KEYSTROKES_TO_CHARS[pending];
-          resolvedCombos.push(
-            new MSIMEKeyCombo({ chars: alphabet, strokes: pending, attrs: Attrs.FALLBACK_ALPHABET })
-          );
-          // terminate the combo
-          combo = null;
-        }
+      const { append, resolvedCombo } = terminatePendingKeystrokes(pending, keystrokes);
+      if (append) {
+        combo.push(append);
+      } else if (resolvedCombo) {
+        resolvedCombos.push(resolvedCombo);
+        // terminate the combo
+        combo = null;
       }
       pending = "";
     }
@@ -346,6 +384,16 @@ export function parseKeystrokes(keystrokes: string): ParsedKeystrokes {
 
   if (combo && combo.length >= 1) {
     resolvedCombos.push(combo);
+  }
+
+  if (terminatePending) {
+    const { append, resolvedCombo } = terminatePendingKeystrokes(pending, "");
+    if (append) {
+      resolvedCombos.push(new MSIMEKeyCombo(append));
+    } else if (resolvedCombo) {
+      resolvedCombos.push(resolvedCombo);
+    }
+    pending = "";
   }
 
   return { resolved: resolvedCombos, pending };

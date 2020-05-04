@@ -1,7 +1,7 @@
 /**
  * A mapping from keystrokes to characters.
  */
-type KeystrokesToChars = { [key: string]: string };
+export type KeystrokesToChars = { [key: string]: string };
 
 /**
  * A mapping from characters to a list of keystrokes.

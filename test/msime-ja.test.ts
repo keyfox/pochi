@@ -130,6 +130,20 @@ describe("msime-ja", () => {
       ],
     ],
     [
+      "っｂ",
+      [
+        [
+          {
+            chars: "っ",
+            strokes: "b",
+            attrs: Attrs.CONSONANT_PREFIX,
+          },
+          { chars: "ｂ", strokes: "b", attrs: Attrs.FALLBACK_ALPHABET },
+        ],
+        ...CONSONANTS,
+      ],
+    ],
+    [
       "っっ",
       [
         [
@@ -291,6 +305,16 @@ describe("msime-ja", () => {
       ],
     ],
     [
+      "んｂ",
+      [
+        ...EXPLICIT_N,
+        [
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ｂ", strokes: "b", attrs: Attrs.FALLBACK_ALPHABET },
+        ],
+      ],
+    ],
+    [
       "んって",
       [
         ...EXPLICIT_N,
@@ -428,8 +452,13 @@ describe("msime-ja", () => {
     ["ー", [[{ chars: "ー", strokes: "-", attrs: Attrs.SYMBOL }]]],
     ["１", [[{ chars: "１", strokes: "1", attrs: Attrs.NUMBER }]]],
 
+    // alphabets
+    ["ｂ", [[{ chars: "ｂ", strokes: "b", attrs: Attrs.FALLBACK_ALPHABET }]]],
+    ["ｂがた", [[{ chars: "ｂ", strokes: "b", attrs: Attrs.FALLBACK_ALPHABET }]]],
+    ["ｂばすぱーく", [[{ chars: "ｂ", strokes: "b", attrs: Attrs.FALLBACK_ALPHABET }]]],
+
     // if any undefined key is supplied, then just return it
-    ["a", [[{ chars: "a", strokes: "a", attrs: Attrs.UNDEFINED }]]],
+    ["否", [[{ chars: "否", strokes: "否", attrs: Attrs.UNDEFINED }]]],
   ];
 
   describe("getNextSequencesList", () => {
@@ -547,7 +576,7 @@ describe("msime-ja", () => {
   });
 
   describe("resolveKeystrokes", () => {
-    const TEST_CASES: [string, [string, string, Attrs][][], string][] = [
+    const TEST_CASES: [string, [string, string, Attrs][][], string, boolean?][] = [
       // resolves nothing when the input is empty
       ["", [], ""],
       // anything resolved will be put into an array, and others will be returned as a string
@@ -697,14 +726,16 @@ describe("msime-ja", () => {
         ],
         "",
       ],
+      ["nb", [[["n", "ん", Attrs.SINGLE_N]], [["b", "ｂ", Attrs.FALLBACK_ALPHABET]]], "", true],
+      ["否", [[["否", "否", Attrs.UNDEFINED]]], ""],
     ];
 
     for (let testCase of TEST_CASES) {
-      const [src, resolvers, pending] = testCase;
+      const [src, resolvers, pending, terminated = false] = testCase;
       it(`resolves "${src}" => "${resolvers.map((e) => e.map((e) => e[1])).join("")}"${
         pending !== "" ? ` and "${pending}"` : ""
       }`, () => {
-        expect(parseKeystrokes(src)).to.deep.equal({
+        expect(parseKeystrokes(src, { terminatePending: terminated })).to.deep.equal({
           resolved: resolvers.map((combo) =>
             combo.map(([strokes, chars, attrs]) => ({
               strokes,
@@ -716,5 +747,23 @@ describe("msime-ja", () => {
         });
       });
     }
+
+    it("respects termination option", () => {
+      expect(parseKeystrokes("mikan", { terminatePending: false })).to.deep.equal({
+        resolved: [
+          [{ strokes: "mi", chars: "み", attrs: Attrs.NONE }],
+          [{ strokes: "ka", chars: "か", attrs: Attrs.PREF_FACTOR }],
+        ],
+        pending: "n",
+      });
+      expect(parseKeystrokes("mikan", { terminatePending: true })).to.deep.equal({
+        resolved: [
+          [{ strokes: "mi", chars: "み", attrs: Attrs.NONE }],
+          [{ strokes: "ka", chars: "か", attrs: Attrs.PREF_FACTOR }],
+          [{ strokes: "n", chars: "ん", attrs: Attrs.SINGLE_N }],
+        ],
+        pending: "",
+      });
+    });
   });
 });
