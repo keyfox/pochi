@@ -53,7 +53,6 @@ export interface MSIMESolver extends Solver {
   attrs: Attrs;
 }
 
-// TODO: Type name could be better
 /**
  * A mapping from keystrokes to the corresponding MSIMESolver instance.
  * @internal
