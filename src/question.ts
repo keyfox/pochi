@@ -65,7 +65,7 @@ export class Question extends TypingStateMachine {
    * @return The possible first key combos taking the pending inputs into consideration.
    */
   getNextPossibleKeyCombos(): MSIMEKeyCombo[] {
-    return this.getNextKeyCombos().filter((keyseq) => keyseq.strokes.startsWith(this.pendingKeystrokes));
+    return this.getNextKeyCombos().filter((combo) => combo.strokes.startsWith(this.pendingKeystrokes));
   }
 
   /**
