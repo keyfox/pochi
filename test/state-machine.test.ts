@@ -1,7 +1,7 @@
-import { TypingStateMachine } from "../src/state-machine";
+import { TypingStateMachine } from "../src";
 import { expect } from "chai";
 import { MSIMEKeyCombo } from "../src/msime-ja";
-import { Attrs as ATTRS } from "../src/msime-ja/resolvers";
+import { Attrs } from "../src/msime-ja/resolvers";
 
 describe("TypingStateMachine", () => {
   describe("#_supplyResolvedKeystrokes", () => {
@@ -11,7 +11,7 @@ describe("TypingStateMachine", () => {
       expect(q.pendingKeystrokes).to.equal("k");
       expect(() => {
         q._supplyResolvedKeystrokes({
-          resolved: [new MSIMEKeyCombo({ chars: "か", strokes: "ca", attrs: ATTRS.PREF_FACTOR })],
+          resolved: [new MSIMEKeyCombo({ chars: "か", strokes: "ca", attrs: Attrs.PREF_FACTOR })],
           pending: "",
         });
       }).to.throw(RangeError, "conflict");
@@ -165,7 +165,7 @@ describe("TypingStateMachine", () => {
       q.supplyKeystrokes("a");
       expect(q)
         .to.have.property("keyCombos")
-        .that.have.deep.members([[{ chars: "あ", strokes: "a", attrs: ATTRS.NONE }]]);
+        .that.have.deep.members([[{ chars: "あ", strokes: "a", attrs: Attrs.NONE }]]);
     });
   });
 });

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { getFirstKeyCombos as getNextKeyseqsList, keyComboChooser, parseKeystrokes } from "../src/msime-ja";
 import { DETERMINISTIC_KEYSTROKES_TO_CHARS } from "../src/msime-ja/keystrokes";
-import { Attrs as ATTRS } from "../src/msime-ja/resolvers";
+import { Attrs } from "../src/msime-ja/resolvers";
 
 const CHARS_TO_DETERMINISTIC_KEYSTROKES_LIST = (() => {
   const dict = Object.keys(DETERMINISTIC_KEYSTROKES_TO_CHARS).reduce<{ [key: string]: string[] }>(
@@ -36,36 +36,36 @@ describe("msime-ja", () => {
   });
 
   const CONSONANTS = [
-    [{ chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR }],
-    [{ chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR }],
-    [{ chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR }],
+    [{ chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR }],
+    [{ chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR }],
+    [{ chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR }],
   ];
   const EXPLICIT_N = [
-    [{ chars: "ん", strokes: "xn", attrs: ATTRS.PREF_FACTOR }],
-    [{ chars: "ん", strokes: "nn", attrs: ATTRS.PREF_FACTOR }],
-    [{ chars: "ん", strokes: "n'", attrs: ATTRS.PREF_FACTOR }],
+    [{ chars: "ん", strokes: "xn", attrs: Attrs.PREF_FACTOR }],
+    [{ chars: "ん", strokes: "nn", attrs: Attrs.PREF_FACTOR }],
+    [{ chars: "ん", strokes: "n'", attrs: Attrs.PREF_FACTOR }],
   ];
 
-  const TEST_CASES: [string, { chars: string; strokes: string; attrs: ATTRS }[][]][] = [
+  const TEST_CASES: [string, { chars: string; strokes: string; attrs: Attrs }[][]][] = [
     // empty
     ["", []],
 
     // single pattern
-    ["あ", [[{ chars: "あ", strokes: "a", attrs: ATTRS.NONE }]]],
+    ["あ", [[{ chars: "あ", strokes: "a", attrs: Attrs.NONE }]]],
 
     // 2 or more pattern
     [
       "い",
       [
-        [{ chars: "い", strokes: "i", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "い", strokes: "yi", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "い", strokes: "i", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "い", strokes: "yi", attrs: Attrs.PREF_FACTOR }],
       ],
     ],
     [
       "か",
       [
-        [{ chars: "か", strokes: "ka", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "か", strokes: "ca", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "か", strokes: "ka", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "か", strokes: "ca", attrs: Attrs.PREF_FACTOR }],
       ],
     ],
 
@@ -73,21 +73,21 @@ describe("msime-ja", () => {
     [
       "ふぇ",
       [
-        [{ chars: "ふ", strokes: "fu", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ふ", strokes: "hu", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ふぇ", strokes: "fe", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ふぇ", strokes: "fye", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ふぇ", strokes: "fwe", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "ふ", strokes: "fu", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ふ", strokes: "hu", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ふぇ", strokes: "fe", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ふぇ", strokes: "fye", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ふぇ", strokes: "fwe", attrs: Attrs.PREF_FACTOR }],
       ],
     ],
     [
       "ちゃ",
       [
-        [{ chars: "ち", strokes: "chi", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ち", strokes: "ti", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ちゃ", strokes: "cha", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ちゃ", strokes: "tya", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ちゃ", strokes: "cya", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "ち", strokes: "chi", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ち", strokes: "ti", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ちゃ", strokes: "cha", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ちゃ", strokes: "tya", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ちゃ", strokes: "cya", attrs: Attrs.PREF_FACTOR }],
       ],
     ],
 
@@ -100,9 +100,9 @@ describe("msime-ja", () => {
           {
             chars: "っ",
             strokes: "t",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "た", strokes: "ta", attrs: ATTRS.NONE },
+          { chars: "た", strokes: "ta", attrs: Attrs.NONE },
         ],
         ...CONSONANTS,
       ],
@@ -114,17 +114,17 @@ describe("msime-ja", () => {
           {
             chars: "っ",
             strokes: "k",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "か", strokes: "ka", attrs: ATTRS.PREF_FACTOR },
+          { chars: "か", strokes: "ka", attrs: Attrs.PREF_FACTOR },
         ],
         [
           {
             chars: "っ",
             strokes: "c",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "か", strokes: "ca", attrs: ATTRS.PREF_FACTOR },
+          { chars: "か", strokes: "ca", attrs: Attrs.PREF_FACTOR },
         ],
         ...CONSONANTS,
       ],
@@ -136,25 +136,25 @@ describe("msime-ja", () => {
           {
             chars: "っ",
             strokes: "x",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR },
         ],
         [
           {
             chars: "っ",
             strokes: "l",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR },
         ],
         [
           {
             chars: "っ",
             strokes: "l",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR },
         ],
         ...CONSONANTS,
       ],
@@ -167,38 +167,38 @@ describe("msime-ja", () => {
           {
             chars: "っ",
             strokes: "x",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR },
         ],
         [
           {
             chars: "っ",
             strokes: "l",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR },
         ],
         [
           {
             chars: "っ",
             strokes: "l",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR },
         ],
         [
           {
             chars: "っ",
             strokes: "t",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
           {
             chars: "っ",
             strokes: "t",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "た", strokes: "ta", attrs: ATTRS.NONE },
+          { chars: "た", strokes: "ta", attrs: Attrs.NONE },
         ],
         ...CONSONANTS,
       ],
@@ -218,8 +218,8 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ん", strokes: "xn", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ん", strokes: "xn", attrs: Attrs.PREF_FACTOR },
         ],
       ],
     ],
@@ -228,8 +228,8 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ん", strokes: "xn", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ん", strokes: "xn", attrs: Attrs.PREF_FACTOR },
         ],
       ],
     ],
@@ -238,8 +238,8 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ん", strokes: "xn", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ん", strokes: "xn", attrs: Attrs.PREF_FACTOR },
         ],
       ],
     ],
@@ -249,12 +249,12 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "か", strokes: "ka", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "か", strokes: "ka", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "か", strokes: "ca", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "か", strokes: "ca", attrs: Attrs.PREF_FACTOR },
         ],
       ],
     ],
@@ -263,12 +263,12 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ぁ", strokes: "xa", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ぁ", strokes: "xa", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ぁ", strokes: "la", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ぁ", strokes: "la", attrs: Attrs.PREF_FACTOR },
         ],
       ],
     ],
@@ -277,16 +277,16 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR },
         ],
       ],
     ],
@@ -295,25 +295,25 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
           {
             chars: "っ",
             strokes: "t",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "て", strokes: "te", attrs: ATTRS.NONE },
+          { chars: "て", strokes: "te", attrs: Attrs.NONE },
         ],
       ],
     ],
@@ -322,43 +322,43 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
           {
             chars: "っ",
             strokes: "x",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
           {
             chars: "っ",
             strokes: "l",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
           {
             chars: "っ",
             strokes: "l",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR },
         ],
       ],
     ],
@@ -367,57 +367,57 @@ describe("msime-ja", () => {
       [
         ...EXPLICIT_N,
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
           {
             chars: "っ",
             strokes: "x",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
           {
             chars: "っ",
             strokes: "l",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
           {
             chars: "っ",
             strokes: "l",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR },
+          { chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR },
         ],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
           {
             chars: "っ",
             strokes: "t",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
           {
             chars: "っ",
             strokes: "t",
-            attrs: ATTRS.CONSONANT_PREFIX,
+            attrs: Attrs.CONSONANT_PREFIX,
           },
-          { chars: "て", strokes: "te", attrs: ATTRS.NONE },
+          { chars: "て", strokes: "te", attrs: Attrs.NONE },
         ],
       ],
     ],
@@ -425,11 +425,11 @@ describe("msime-ja", () => {
     ["ん", EXPLICIT_N],
 
     // symbols and numbers
-    ["ー", [[{ chars: "ー", strokes: "-", attrs: ATTRS.SYMBOL }]]],
-    ["１", [[{ chars: "１", strokes: "1", attrs: ATTRS.NUMBER }]]],
+    ["ー", [[{ chars: "ー", strokes: "-", attrs: Attrs.SYMBOL }]]],
+    ["１", [[{ chars: "１", strokes: "1", attrs: Attrs.NUMBER }]]],
 
     // if any undefined key is supplied, then just return it
-    ["a", [[{ chars: "a", strokes: "a", attrs: ATTRS.UNDEFINED }]]],
+    ["a", [[{ chars: "a", strokes: "a", attrs: Attrs.UNDEFINED }]]],
   ];
 
   describe("getNextSequencesList", () => {
@@ -547,21 +547,21 @@ describe("msime-ja", () => {
   });
 
   describe("resolveKeystrokes", () => {
-    const TEST_CASES: [string, [string, string, ATTRS][][], string][] = [
+    const TEST_CASES: [string, [string, string, Attrs][][], string][] = [
       // resolves nothing when the input is empty
       ["", [], ""],
       // anything resolved will be put into an array, and others will be returned as a string
-      ["a", [[["a", "あ", ATTRS.NONE]]], ""],
+      ["a", [[["a", "あ", Attrs.NONE]]], ""],
       ["b", [], "b"],
-      ["ka", [[["ka", "か", ATTRS.PREF_FACTOR]]], ""],
-      ["kak", [[["ka", "か", ATTRS.PREF_FACTOR]]], "k"],
+      ["ka", [[["ka", "か", Attrs.PREF_FACTOR]]], ""],
+      ["kak", [[["ka", "か", Attrs.PREF_FACTOR]]], "k"],
       // dependent consonants
       [
         "tta",
         [
           [
-            ["t", "っ", ATTRS.CONSONANT_PREFIX],
-            ["ta", "た", ATTRS.NONE],
+            ["t", "っ", Attrs.CONSONANT_PREFIX],
+            ["ta", "た", Attrs.NONE],
           ],
         ],
         "",
@@ -570,97 +570,97 @@ describe("msime-ja", () => {
         "ttta",
         [
           [
-            ["t", "っ", ATTRS.CONSONANT_PREFIX],
-            ["t", "っ", ATTRS.CONSONANT_PREFIX],
-            ["ta", "た", ATTRS.NONE],
+            ["t", "っ", Attrs.CONSONANT_PREFIX],
+            ["t", "っ", Attrs.CONSONANT_PREFIX],
+            ["ta", "た", Attrs.NONE],
           ],
         ],
         "",
       ],
       [
         "furess",
-        [[["fu", "ふ", ATTRS.PREF_FACTOR]], [["re", "れ", ATTRS.NONE]], [["s", "っ", ATTRS.CONSONANT_PREFIX]]],
+        [[["fu", "ふ", Attrs.PREF_FACTOR]], [["re", "れ", Attrs.NONE]], [["s", "っ", Attrs.CONSONANT_PREFIX]]],
         "s",
       ],
       [
         "tatte",
         [
-          [["ta", "た", ATTRS.NONE]],
+          [["ta", "た", Attrs.NONE]],
           [
-            ["t", "っ", ATTRS.CONSONANT_PREFIX],
-            ["te", "て", ATTRS.NONE],
+            ["t", "っ", Attrs.CONSONANT_PREFIX],
+            ["te", "て", Attrs.NONE],
           ],
         ],
         "",
       ],
       // `n` characters
-      ["kan", [[["ka", "か", ATTRS.PREF_FACTOR]]], "n"],
-      ["kann", [[["ka", "か", ATTRS.PREF_FACTOR]], [["nn", "ん", ATTRS.PREF_FACTOR]]], ""],
+      ["kan", [[["ka", "か", Attrs.PREF_FACTOR]]], "n"],
+      ["kann", [[["ka", "か", Attrs.PREF_FACTOR]], [["nn", "ん", Attrs.PREF_FACTOR]]], ""],
       [
         "kankei",
         [
-          [["ka", "か", ATTRS.PREF_FACTOR]],
+          [["ka", "か", Attrs.PREF_FACTOR]],
           [
-            ["n", "ん", ATTRS.SINGLE_N],
-            ["ke", "け", ATTRS.NONE],
+            ["n", "ん", Attrs.SINGLE_N],
+            ["ke", "け", Attrs.NONE],
           ],
-          [["i", "い", ATTRS.PREF_FACTOR]],
+          [["i", "い", Attrs.PREF_FACTOR]],
         ],
         "",
       ],
-      ["nnka", [[["nn", "ん", ATTRS.PREF_FACTOR]], [["ka", "か", ATTRS.PREF_FACTOR]]], ""],
-      ["nnnnn", [[["nn", "ん", ATTRS.PREF_FACTOR]], [["nn", "ん", ATTRS.PREF_FACTOR]]], "n"],
+      ["nnka", [[["nn", "ん", Attrs.PREF_FACTOR]], [["ka", "か", Attrs.PREF_FACTOR]]], ""],
+      ["nnnnn", [[["nn", "ん", Attrs.PREF_FACTOR]], [["nn", "ん", Attrs.PREF_FACTOR]]], "n"],
       // arbitary text
       [
         "orehajaiangakidaishou",
         [
-          [["o", "お", ATTRS.NONE]],
-          [["re", "れ", ATTRS.NONE]],
-          [["ha", "は", ATTRS.NONE]],
-          [["ja", "じゃ", ATTRS.PREF_FACTOR]],
-          [["i", "い", ATTRS.PREF_FACTOR]],
-          [["a", "あ", ATTRS.NONE]],
+          [["o", "お", Attrs.NONE]],
+          [["re", "れ", Attrs.NONE]],
+          [["ha", "は", Attrs.NONE]],
+          [["ja", "じゃ", Attrs.PREF_FACTOR]],
+          [["i", "い", Attrs.PREF_FACTOR]],
+          [["a", "あ", Attrs.NONE]],
           [
-            ["n", "ん", ATTRS.SINGLE_N],
-            ["ga", "が", ATTRS.NONE],
+            ["n", "ん", Attrs.SINGLE_N],
+            ["ga", "が", Attrs.NONE],
           ],
-          [["ki", "き", ATTRS.NONE]],
-          [["da", "だ", ATTRS.NONE]],
-          [["i", "い", ATTRS.PREF_FACTOR]],
-          [["sho", "しょ", ATTRS.PREF_FACTOR]],
-          [["u", "う", ATTRS.PREF_FACTOR]],
+          [["ki", "き", Attrs.NONE]],
+          [["da", "だ", Attrs.NONE]],
+          [["i", "い", Attrs.PREF_FACTOR]],
+          [["sho", "しょ", Attrs.PREF_FACTOR]],
+          [["u", "う", Attrs.PREF_FACTOR]],
         ],
         "",
       ],
       [
         "hokkaidou",
         [
-          [["ho", "ほ", ATTRS.NONE]],
+          [["ho", "ほ", Attrs.NONE]],
           [
-            ["k", "っ", ATTRS.CONSONANT_PREFIX],
-            ["ka", "か", ATTRS.PREF_FACTOR],
+            ["k", "っ", Attrs.CONSONANT_PREFIX],
+            ["ka", "か", Attrs.PREF_FACTOR],
           ],
-          [["i", "い", ATTRS.PREF_FACTOR]],
-          [["do", "ど", ATTRS.NONE]],
-          [["u", "う", ATTRS.PREF_FACTOR]],
+          [["i", "い", Attrs.PREF_FACTOR]],
+          [["do", "ど", Attrs.NONE]],
+          [["u", "う", Attrs.PREF_FACTOR]],
         ],
         "",
       ],
       [
         "170senchi74kiro",
         [
-          [["1", "１", ATTRS.NUMBER]],
-          [["7", "７", ATTRS.NUMBER]],
-          [["0", "０", ATTRS.NUMBER]],
-          [["se", "せ", ATTRS.PREF_FACTOR]],
+          [["1", "１", Attrs.NUMBER]],
+          [["7", "７", Attrs.NUMBER]],
+          [["0", "０", Attrs.NUMBER]],
+          [["se", "せ", Attrs.PREF_FACTOR]],
           [
-            ["n", "ん", ATTRS.SINGLE_N],
-            ["chi", "ち", ATTRS.PREF_FACTOR],
+            ["n", "ん", Attrs.SINGLE_N],
+            ["chi", "ち", Attrs.PREF_FACTOR],
           ],
-          [["7", "７", ATTRS.NUMBER]],
-          [["4", "４", ATTRS.NUMBER]],
-          [["ki", "き", ATTRS.NONE]],
-          [["ro", "ろ", ATTRS.NONE]],
+          [["7", "７", Attrs.NUMBER]],
+          [["4", "４", Attrs.NUMBER]],
+          [["ki", "き", Attrs.NONE]],
+          [["ro", "ろ", Attrs.NONE]],
         ],
         "",
       ],
@@ -668,9 +668,9 @@ describe("msime-ja", () => {
       [
         "mk2",
         [
-          [["m", "ｍ", ATTRS.FALLBACK_ALPHABET]],
-          [["k", "ｋ", ATTRS.FALLBACK_ALPHABET]],
-          [["2", "２", ATTRS.NUMBER]],
+          [["m", "ｍ", Attrs.FALLBACK_ALPHABET]],
+          [["k", "ｋ", Attrs.FALLBACK_ALPHABET]],
+          [["2", "２", Attrs.NUMBER]],
         ],
         "",
       ],
@@ -678,12 +678,12 @@ describe("msime-ja", () => {
       [
         "mk2222",
         [
-          [["m", "ｍ", ATTRS.FALLBACK_ALPHABET]],
-          [["k", "ｋ", ATTRS.FALLBACK_ALPHABET]],
-          [["2", "２", ATTRS.NUMBER]],
-          [["2", "２", ATTRS.NUMBER]],
-          [["2", "２", ATTRS.NUMBER]],
-          [["2", "２", ATTRS.NUMBER]],
+          [["m", "ｍ", Attrs.FALLBACK_ALPHABET]],
+          [["k", "ｋ", Attrs.FALLBACK_ALPHABET]],
+          [["2", "２", Attrs.NUMBER]],
+          [["2", "２", Attrs.NUMBER]],
+          [["2", "２", Attrs.NUMBER]],
+          [["2", "２", Attrs.NUMBER]],
         ],
         "",
       ],

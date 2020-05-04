@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { Question } from "../src/question";
+import { Question } from "../src";
 import { keyComboChooser } from "../src/msime-ja";
-import { Attrs as ATTRS } from "../src/msime-ja/resolvers";
+import { Attrs } from "../src/msime-ja/resolvers";
 
 describe("Question", () => {
   describe("#constructor", () => {
@@ -46,23 +46,23 @@ describe("Question", () => {
     it("works with multiple patterns", () => {
       const q = new Question("しゃみこ");
       expect(q.getFirstKeyCombosFrom()).to.have.deep.members([
-        [{ chars: "し", strokes: "shi", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "し", strokes: "ci", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "し", strokes: "si", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "しゃ", strokes: "sya", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "しゃ", strokes: "sha", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "し", strokes: "shi", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "し", strokes: "ci", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "し", strokes: "si", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "しゃ", strokes: "sya", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "しゃ", strokes: "sha", attrs: Attrs.PREF_FACTOR }],
       ]);
     });
 
     it("works with consonants", () => {
       const q = new Question("ったこ");
       expect(q.getFirstKeyCombosFrom()).to.have.deep.members([
-        [{ chars: "っ", strokes: "xtu", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "っ", strokes: "ltu", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "っ", strokes: "ltsu", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "っ", strokes: "xtu", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "っ", strokes: "ltu", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "っ", strokes: "ltsu", attrs: Attrs.PREF_FACTOR }],
         [
-          { chars: "っ", strokes: "t", attrs: ATTRS.CONSONANT_PREFIX },
-          { chars: "た", strokes: "ta", attrs: ATTRS.NONE },
+          { chars: "っ", strokes: "t", attrs: Attrs.CONSONANT_PREFIX },
+          { chars: "た", strokes: "ta", attrs: Attrs.NONE },
         ],
       ]);
     });
@@ -70,12 +70,12 @@ describe("Question", () => {
     it("works with text containing `ん`", () => {
       const q = new Question("んご");
       expect(q.getFirstKeyCombosFrom()).to.have.deep.members([
-        [{ chars: "ん", strokes: "xn", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ん", strokes: "nn", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "ん", strokes: "n'", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "ん", strokes: "xn", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ん", strokes: "nn", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "ん", strokes: "n'", attrs: Attrs.PREF_FACTOR }],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ご", strokes: "go", attrs: Attrs.NONE },
         ],
       ]);
     });
@@ -83,7 +83,7 @@ describe("Question", () => {
     it("respects the start index", () => {
       const q = new Question("んご");
       expect(q.getFirstKeyCombosFrom(1)).to.have.deep.members([
-        [{ chars: "ご", strokes: "go", attrs: ATTRS.NONE }],
+        [{ chars: "ご", strokes: "go", attrs: Attrs.NONE }],
       ]);
     });
   });
@@ -92,11 +92,11 @@ describe("Question", () => {
     it("returns resolved from the current position", () => {
       const q = new Question("しゃみこ");
       expect(q.getNextKeyCombos()).to.have.deep.members([
-        [{ chars: "し", strokes: "shi", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "し", strokes: "si", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "し", strokes: "ci", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "しゃ", strokes: "sya", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "しゃ", strokes: "sha", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "し", strokes: "shi", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "し", strokes: "si", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "し", strokes: "ci", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "しゃ", strokes: "sya", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "しゃ", strokes: "sha", attrs: Attrs.PREF_FACTOR }],
       ]);
     });
 
@@ -111,15 +111,15 @@ describe("Question", () => {
     it("takes the current pending input into account", () => {
       const q = new Question("しゃみこ");
       expect(q.getNextPossibleKeyCombos()).to.have.deep.members([
-        [{ chars: "し", strokes: "shi", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "し", strokes: "si", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "し", strokes: "ci", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "しゃ", strokes: "sya", attrs: ATTRS.PREF_FACTOR }],
-        [{ chars: "しゃ", strokes: "sha", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "し", strokes: "shi", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "し", strokes: "si", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "し", strokes: "ci", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "しゃ", strokes: "sya", attrs: Attrs.PREF_FACTOR }],
+        [{ chars: "しゃ", strokes: "sha", attrs: Attrs.PREF_FACTOR }],
       ]);
       q.supplyKeystrokes("c");
       expect(q.getNextPossibleKeyCombos()).to.have.deep.members([
-        [{ chars: "し", strokes: "ci", attrs: ATTRS.PREF_FACTOR }],
+        [{ chars: "し", strokes: "ci", attrs: Attrs.PREF_FACTOR }],
       ]);
     });
   });
@@ -133,10 +133,10 @@ describe("Question", () => {
     it("returns a keysequence from the head by default", () => {
       const q = new Question("さんご");
       expect(q.getKeyCombosSequence(0)).to.deep.equal([
-        [{ chars: "さ", strokes: "sa", attrs: ATTRS.NONE }],
+        [{ chars: "さ", strokes: "sa", attrs: Attrs.NONE }],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ご", strokes: "go", attrs: Attrs.NONE },
         ],
       ]);
     });
@@ -145,8 +145,8 @@ describe("Question", () => {
       const q = new Question("さんご");
       expect(q.getKeyCombosSequence(1)).to.deep.equal([
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ご", strokes: "go", attrs: Attrs.NONE },
         ],
       ]);
     });
@@ -156,7 +156,7 @@ describe("Question", () => {
       for (let pref of ["si", "shi", "ci"]) {
         const chooser = keyComboChooser({ byChars: { し: pref } });
         expect(q.getKeyCombosSequence(0, chooser)).to.deep.equal([
-          [{ chars: "し", strokes: pref, attrs: ATTRS.PREF_FACTOR }],
+          [{ chars: "し", strokes: pref, attrs: Attrs.PREF_FACTOR }],
         ]);
       }
     });
@@ -166,17 +166,17 @@ describe("Question", () => {
     it("takes the current pending input into account", () => {
       const q = new Question("さんご");
       expect(q.getRestKeyCombosSequence()).to.deep.equal([
-        [{ chars: "さ", strokes: "sa", attrs: ATTRS.NONE }],
+        [{ chars: "さ", strokes: "sa", attrs: Attrs.NONE }],
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ご", strokes: "go", attrs: Attrs.NONE },
         ],
       ]);
       q.supplyKeystrokes("sa");
       expect(q.getRestKeyCombosSequence()).to.deep.equal([
         [
-          { chars: "ん", strokes: "n", attrs: ATTRS.SINGLE_N },
-          { chars: "ご", strokes: "go", attrs: ATTRS.NONE },
+          { chars: "ん", strokes: "n", attrs: Attrs.SINGLE_N },
+          { chars: "ご", strokes: "go", attrs: Attrs.NONE },
         ],
       ]);
     });
