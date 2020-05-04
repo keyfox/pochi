@@ -366,7 +366,10 @@ export const SYMBOL_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
 export const NUMBER_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
   zipIntoDict(`0123456789`, "０１２３４５６７８９")
 );
-console.log(NUMBER_KEYSTROKES_TO_CHARS);
+
+export const ALPHABET_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
+  zipIntoDict("abcdefghijklmnopqrstuvwxyz", "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ")
+);
 
 /**
  * A dictionary from *deterministic* keystrokes to characters.
