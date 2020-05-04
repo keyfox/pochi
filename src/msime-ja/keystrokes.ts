@@ -346,9 +346,10 @@ export const KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze<KeystrokesTo
 });
 
 function zipIntoDict(keys: string, values: string): KeystrokesToChars {
-  if (keys.length !== values.length) {
-    throw new RangeError(`length of keys (${keys.length}) must be equals to that of values (${values.length})`);
-  }
+  console.assert(
+    keys.length === values.length,
+    `length of keys (${keys.length}) must be equals to that of values (${values.length})`
+  );
   const dict: KeystrokesToChars = {};
   for (let i = 0, j = keys.length; i < j; ++i) {
     dict[keys.charAt(i)] = values.charAt(i);

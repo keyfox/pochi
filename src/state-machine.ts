@@ -44,9 +44,15 @@ export class TypingStateMachine {
    */
   _supplyResolvedKeystrokes(resolvedKeystrokes: ParsedKeystrokes): void {
     const { resolved, pending } = resolvedKeystrokes;
-    if (resolved[0] && !resolved[0].strokes.startsWith(this._pendingKeystrokes)) {
+    if (
+      resolved.length >= 1 &&
+      !resolved
+        .map((c) => c.strokes)
+        .join("")
+        .startsWith(this._pendingKeystrokes)
+    ) {
       throw new RangeError(
-        `the given keystrokes (${resolved[0].chars}) conflicts
+        `the given keystrokes (${resolved[0].strokes}) conflicts
         with the current pending keystrokes (${this._pendingKeystrokes})`
       );
     }
