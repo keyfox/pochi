@@ -2,7 +2,7 @@
   "name": "@keyfox/pochi",
   "description": "The MS-IME Japanese Input emulation library for JavaScript",
   "author": "Keyfox",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": "https://github.com/keyfox/pochi.git",
