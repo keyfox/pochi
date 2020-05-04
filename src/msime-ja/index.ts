@@ -272,19 +272,40 @@ export interface ParsedKeystrokes {
   pending: string;
 }
 
+/**
+ * Solve the pending keystrokes with the rest keystrokes.
+ *
+ * Returns an object with the key either `append` or `resolvedCombo`.
+ * - `append` key comes with the value of MSIMESolver and
+ *   it indicates that the pending keystrokes should be appended
+ *   to the key combo just before the pending keystrokes.
+ * - `resolvedCombo` key comes with the value of MSIMEKeyCombo and
+ *   it indicates that the pending keystrokes is resolved
+ *   into an independent key combo. Usually the returned key combo
+ *   should follow the one just before the pending keystrokes.
+ *
+ * @param pending The pending keystrokes to parse.
+ * @param restKeystrokes The rest keystrokes, following the pending keystrokes.
+ * @internal
+ */
 function terminatePendingKeystrokes(
   pending: string,
   restKeystrokes: string
 ): {
+  /**
+   * Presents if the pending keystrokes is a solver and it should be appended
+   * to the combo just before the pending keystrokes.
+   */
   append?: MSIMESolver;
+  /**
+   * Presents if the pending keystrokes is a dependent key combo.
+   */
   resolvedCombo?: MSIMEKeyCombo;
 } {
   {
     // Resolve the pending character anyway assuming there is further text
     if (pending === "n") {
-      return {
-        append: SINGLE_N_SOLVER,
-      };
+      return { append: SINGLE_N_SOLVER };
     } else {
       const nextChar = restKeystrokes.charAt(0);
       if (pending === nextChar && !AIUEON_TRUE_DICT[nextChar]) {

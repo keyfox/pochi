@@ -115,7 +115,7 @@
 					<div class="tsd-signature tsd-kind-icon">Key<wbr>Combo<wbr>Chooser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>keyCombos<span class="tsd-signature-symbol">: </span><a href="../classes/_msime_ja_index_.msimekeycombo.html" class="tsd-signature-type">MSIMEKeyCombo</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../classes/_msime_ja_index_.msimekeycombo.html" class="tsd-signature-type">MSIMEKeyCombo</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/index.ts:208</li>
+							<li>Defined in src/msime-ja/index.ts:216</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -162,7 +162,7 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>PREFS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_msime_ja_index_.preferences.html" class="tsd-signature-type">Preferences</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = Object.freeze&lt;Preferences&gt;({acceptSingleN: true,acceptDependentConsonant: true,})</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/msime-ja/index.ts:36</li>
+							<li>Defined in src/msime-ja/index.ts:38</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +188,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/msime-ja/index.ts:122</li>
+									<li>Defined in src/msime-ja/index.ts:125</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -220,7 +220,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/msime-ja/index.ts:224</li>
+									<li>Defined in src/msime-ja/index.ts:232</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -250,13 +250,13 @@
 					<a name="parsekeystrokes" class="tsd-anchor"></a>
 					<h3>parse<wbr>Keystrokes</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">parse<wbr>Keystrokes<span class="tsd-signature-symbol">(</span>keystrokes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_msime_ja_index_.parsedkeystrokes.html" class="tsd-signature-type">ParsedKeystrokes</a></li>
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Keystrokes<span class="tsd-signature-symbol">(</span>keystrokes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, __namedParameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>terminatePending<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_msime_ja_index_.parsedkeystrokes.html" class="tsd-signature-type">ParsedKeystrokes</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/msime-ja/index.ts:272</li>
+									<li>Defined in src/msime-ja/index.ts:334</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -271,6 +271,17 @@
 									<div class="tsd-comment tsd-typography">
 										<p>Keystrokes to parse.</p>
 									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> __namedParameters: <span class="tsd-signature-symbol">{ </span>terminatePending<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = {}</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>terminate<wbr>Pending<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+											<div class="tsd-comment tsd-typography">
+												<p>Whether to solve the pending keystrokes anyway.</p>
+											</div>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_msime_ja_index_.parsedkeystrokes.html" class="tsd-signature-type">ParsedKeystrokes</a></h4>

@@ -128,7 +128,7 @@ export const DETERMINISTIC_KEYSTROKES_TO_SOLVER = Object.freeze<KeystrokesToSolv
 );
 
 /**
- * A mapping from deterministic keystrokes to the corresponding MSIMESolver instance.
+ * A mapping from alphabet keystrokes to the corresponding MSIMESolver instance.
  * @internal
  */
 export const ALPHABET_KEYSTROKES_TO_SOLVER = Object.freeze<KeystrokesToSolver>(
@@ -167,7 +167,7 @@ export const CHARS_TO_SOLVERS: CharsToSolvers = Object.freeze(
 );
 
 /**
- * A mapping from characters to the corresponding MSIMESolver instances.
+ * A mapping from alphabet characters to the corresponding MSIMESolver instances.
  * @internal
  */
 export const ALPHABET_CHARS_TO_SOLVER: CharsToSolver = Object.freeze(
