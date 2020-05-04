@@ -55,6 +55,10 @@ export enum Attrs {
    * Indicates that the solver solves into a number.
    */
   NUMBER = 1 << 6,
+  /**
+   * Indicates that the solver is alphabet which is not regarded as a part of roman letter input
+   */
+  FALLBACK_ALPHABET = 1 << 7,
 }
 
 /**

@@ -1,4 +1,4 @@
-import { DETERMINISTIC_KEYSTROKES_TO_CHARS } from "./keystrokes";
+import { ALPHABET_KEYSTROKES_TO_CHARS, DETERMINISTIC_KEYSTROKES_TO_CHARS } from "./keystrokes";
 import {
   Attrs,
   CHARS_TO_SOLVERS,
@@ -282,11 +282,15 @@ export function parseKeystrokes(keystrokes: string): ParsedKeystrokes {
       } else {
         const nextChar = keystrokes.charAt(0);
         if (pending === nextChar && !AIUEON_TRUE_DICT[nextChar]) {
-          // the next character is meant to solve `っ`
+          // the pending character is meant to solve `っ`
           combo.push({ chars: "っ", strokes: pending, attrs: Attrs.CONSONANT_PREFIX });
         } else {
-          // the next character is undefined
-          resolvedCombos.push(new MSIMEKeyCombo({ chars: pending, strokes: pending, attrs: Attrs.UNDEFINED }));
+          // the pending character was considered as a part of roman letter input,
+          // but actually it is not
+          const alphabet = ALPHABET_KEYSTROKES_TO_CHARS[pending];
+          resolvedCombos.push(
+            new MSIMEKeyCombo({ chars: alphabet, strokes: pending, attrs: Attrs.FALLBACK_ALPHABET })
+          );
           // terminate the combo
           combo = null;
         }
