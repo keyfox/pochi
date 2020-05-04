@@ -345,6 +345,13 @@ export const KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze<KeystrokesTo
   xwa: "ゎ",
 });
 
+/**
+ * Receive 2 strings which are the same length,
+ * and create a dictionary whose keys and values are each character of the given 2 strings.
+ * @param keys - Characters to use as keys.
+ * @param values - Characters to use as values.
+ * @internal
+ */
 function zipIntoDict(keys: string, values: string): KeystrokesToChars {
   console.assert(
     keys.length === values.length,
@@ -357,6 +364,10 @@ function zipIntoDict(keys: string, values: string): KeystrokesToChars {
   return dict;
 }
 
+/**
+ * A dictionary from symbol keystrokes to characters.
+ * @internal
+ */
 export const SYMBOL_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
   zipIntoDict(
     `!"#$%&'()=~|\`{+*}<>?_-^\\@[;:],./`,
@@ -364,10 +375,18 @@ export const SYMBOL_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
   )
 );
 
+/**
+ * A dictionary from number keystrokes to characters.
+ * @internal
+ */
 export const NUMBER_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
   zipIntoDict(`0123456789`, "０１２３４５６７８９")
 );
 
+/**
+ * A dictionary from alphabet keystrokes to characters.
+ * @internal
+ */
 export const ALPHABET_KEYSTROKES_TO_CHARS: KeystrokesToChars = Object.freeze(
   zipIntoDict("abcdefghijklmnopqrstuvwxyz", "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ")
 );

@@ -11,6 +11,7 @@ import {
   SINGLE_N_SOLVER,
   Solver,
 } from "./resolvers";
+export { Attrs, MSIMESolver } from "./resolvers";
 
 /**
  * An object represents preferences of typing, such as keystrokes for the certain characters.
