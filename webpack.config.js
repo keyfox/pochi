@@ -1,7 +1,9 @@
 "use strict";
 
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const version = require("./package.json").version;
+const TerserPlugin = require("terser-webpack-plugin");
+const { BannerPlugin } = require("webpack");
+const pkg = require("./package.json");
 
 module.exports = {
   mode: "production",
@@ -31,24 +33,28 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: [".ts", ".js"],
   },
   performance: { hints: false },
 
   optimization: {
     minimizer: [
-      new UglifyJSPlugin({
+      new TerserPlugin({
         include: /\.min\.js$/,
-        parallel: true,
         sourceMap: false,
-        uglifyOptions: {
-          compress: true,
-          ie8: false,
-          ecma: 5,
-          output: { comments: false },
-          warnings: false,
+        terserOptions: {
+          // output: {
+          //   comments: /license/i,
+          // },
         },
+        extractComments: false,
       }),
     ],
   },
+
+  plugins: [
+    new BannerPlugin({
+      banner: `@keyfox/pochi v${pkg.version} | (c) 2020 ${pkg.author} | MIT license (see LICENSE)`,
+    }),
+  ],
 };
