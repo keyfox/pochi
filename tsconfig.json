@@ -6,7 +6,6 @@
     "sourceMap": true,
     "strict": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "outDir": "./lib"
   },
   "include": [
