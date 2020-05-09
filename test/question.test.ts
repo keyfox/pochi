@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { Question } from "../src";
-import { keyComboChooser } from "../src/msime-ja";
-import { Attrs } from "../src/msime-ja/resolvers";
+import { Question } from "../lib";
+import { keyComboChooser } from "../lib/msime-ja";
+import { Attrs } from "../lib/msime-ja/resolvers";
 
 describe("Question", () => {
   describe("#constructor", () => {

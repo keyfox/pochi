@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { getFirstKeyCombos, keyComboChooser, parseKeystrokes } from "../src/msime-ja";
-import { DETERMINISTIC_KEYSTROKES_TO_CHARS } from "../src/msime-ja/keystrokes";
-import { Attrs } from "../src/msime-ja/resolvers";
+import { getFirstKeyCombos, keyComboChooser, parseKeystrokes } from "../lib/msime-ja";
+import { DETERMINISTIC_KEYSTROKES_TO_CHARS } from "../lib/msime-ja/keystrokes";
+import { Attrs } from "../lib/msime-ja/resolvers";
 
 const CHARS_TO_DETERMINISTIC_KEYSTROKES_LIST = (() => {
   const dict = Object.keys(DETERMINISTIC_KEYSTROKES_TO_CHARS).reduce<{ [key: string]: string[] }>(
