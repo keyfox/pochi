@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { Question } from "../src";
-import { keyComboChooser } from "../src/msime-ja";
-import { Attrs } from "../src/msime-ja/resolvers";
+import { Question } from "../lib";
+import { keyComboChooser } from "../lib/msime-ja";
+import { Attrs } from "../lib/msime-ja/resolvers";
 
 describe("Question", () => {
   describe("#constructor", () => {
@@ -193,6 +193,21 @@ describe("Question", () => {
       const q = new Question("はずれ");
       expect(q.isSolved()).to.be.false;
     });
+  });
+
+  it("accept valid input", () => {
+    const q = new Question("ふれっしゅ");
+    expect(() => q.supplyKeystrokes("f")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("u")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("r")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("e")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("s")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("s")).not.to.throw(RangeError, "unacceptable");
+    console.log(q.getRestKeyCombosSequence())
+    console.log(q.pendingKeystrokes)
+    expect(() => q.supplyKeystrokes("h")).not.to.throw(RangeError, "unacceptable");
+    console.log(q.getNextPossibleKeyCombos())
+    expect(() => q.supplyKeystrokes("u")).not.to.throw(RangeError, "unacceptable");
   });
 
   it("reject invalid input", () => {

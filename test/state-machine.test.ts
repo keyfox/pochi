@@ -1,7 +1,7 @@
-import { TypingStateMachine } from "../src";
+import { TypingStateMachine } from "../lib";
 import { expect } from "chai";
-import { MSIMEKeyCombo } from "../src/msime-ja";
-import { Attrs } from "../src/msime-ja/resolvers";
+import { MSIMEKeyCombo } from "../lib/msime-ja";
+import { Attrs } from "../lib/msime-ja/resolvers";
 
 describe("TypingStateMachine", () => {
   describe("#_supplyResolvedKeystrokes", () => {

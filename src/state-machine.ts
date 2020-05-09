@@ -60,7 +60,11 @@ export class TypingStateMachine {
     if (lastKeyCombo && (lastKeyCombo[lastKeyCombo.length - 1].attrs & Attrs.DEPENDENT) === Attrs.DEPENDENT) {
       // if the last solver in the last key combo is dependent,
       // then concatenate the newly resolved key combo into the last key combo
-      lastKeyCombo.push(...resolved[0]);
+      if (resolved[0]) {
+        // Ideally it should be `resolved.slice(0, 1)`, but we don't want create a new array just for that
+        // NOTE: Wrap with the condition or it will crash in transpiled code because `...(undefined)` doesn't work
+        lastKeyCombo.push(...resolved[0]);
+      }
       this._keyCombos.push(...resolved.slice(1));
     } else {
       this._keyCombos.push(...resolved);
