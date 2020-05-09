@@ -195,6 +195,21 @@ describe("Question", () => {
     });
   });
 
+  it("accept valid input", () => {
+    const q = new Question("ふれっしゅ");
+    expect(() => q.supplyKeystrokes("f")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("u")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("r")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("e")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("s")).not.to.throw(RangeError, "unacceptable");
+    expect(() => q.supplyKeystrokes("s")).not.to.throw(RangeError, "unacceptable");
+    console.log(q.getRestKeyCombosSequence())
+    console.log(q.pendingKeystrokes)
+    expect(() => q.supplyKeystrokes("h")).not.to.throw(RangeError, "unacceptable");
+    console.log(q.getNextPossibleKeyCombos())
+    expect(() => q.supplyKeystrokes("u")).not.to.throw(RangeError, "unacceptable");
+  });
+
   it("reject invalid input", () => {
     const q = new Question("あらしがすぎたあとに");
     expect(() => q.supplyKeystrokes("a")).not.to.throw(RangeError, "unacceptable");
